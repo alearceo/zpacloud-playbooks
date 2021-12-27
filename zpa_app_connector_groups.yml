@@ -1,0 +1,19 @@
+
+
+- hosts: '{{ target | default("zpa") }}'
+  connection: local
+
+  vars:
+    zpa:
+      zpa_base_url: '{{base_url}}'
+      zpa_client_id: '{{ client_id | default(omit) }}'
+      zpa_client_secret: '{{ secret | default(omit) }}'
+      zpa_customer_id: '{{ customer_id | default(omit) }}'
+
+  tasks:
+    - name: Create app connector groups
+      willguibr.zpa.zpa_app_connector_groups:
+        provider: '{{zpa}}'
+        name: '{{}}'
+        description: '{{}}'
+        enabled: true
