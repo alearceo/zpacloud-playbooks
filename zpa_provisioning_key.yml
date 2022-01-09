@@ -1,0 +1,42 @@
+---
+# zpa_provisioning_key.yml - Create/Update/Delete an Provisioning Key.
+#
+# Description
+# ===========
+#
+# Quick examples of how to use the 'zpa_provisioning_key' module to create an Provisioning Key in the ZPA Cloud.
+#
+# This playbook requires proper API credentials to be passed statically or via environment variables for connection to the ZPA Cloud 'zpa_client_id', 'zpa_client_secret' and zpa_customer_id
+# These may be defined as host variables (see `host_vars/zpa_cloud.yml` for an example) or 
+# extra vars.
+#
+# Modules Used
+# ============
+#
+# zpa_provisioning_key - https://willguibr.github.io/zpacloud_ansible/modules/zpa_provisioning_key.html
+#
+# Usage
+# =====
+#
+#  $ ansible-playbook zpa_provisioning_key.yml
+
+- name: Create
+  hosts: localhost
+
+  tasks:
+
+    - name: Create/Update/Delete App Connector Group Provisioning Key
+      willguibr.zpacloud_ansible.zpa_provisioning_key:
+        name: "App Connector Group Provisioning Key"
+        association_type: "CONNECTOR_GRP"
+        max_usage: "10"
+        enrollment_cert_id: 6573
+        zcomponent_id: 216196257331291903
+
+    - name: Create/Update/Delete Service Edge Connector Group Provisioning Key
+      willguibr.zpacloud_ansible.zpa_provisioning_key:
+        name: "Service Edge Connector Group Provisioning Key"
+        association_type: "CONNECTOR_GRP"
+        max_usage: "10"
+        enrollment_cert_id: 6573
+        zcomponent_id: 216196257331291903

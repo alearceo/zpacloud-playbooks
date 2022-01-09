@@ -1,0 +1,64 @@
+---
+# zpa_application_segment.yml - Create/Update/Delete an Application Segment.
+#
+# Description
+# ===========
+#
+# Quick examples of how to use the 'zpa_application_segment' module to create an Application Segment in the ZPA Cloud.
+#
+# This playbook requires proper API credentials to be passed statically or via environment variables for connection to the ZPA Cloud 'zpa_client_id', 'zpa_client_secret' and zpa_customer_id
+# These may be defined as host variables (see `host_vars/zpa_cloud.yml` for an example) or 
+# extra vars.
+#
+# Modules Used
+# ============
+#
+# zpa_application_segment - https://willguibr.github.io/zpacloud_ansible/modules/zpa_application_segment.html
+#
+# Usage
+# =====
+#
+#  $ ansible-playbook zpa_application_segment.yml
+
+- name: Create ZPA Application Segment
+  hosts: localhost
+
+  tasks:
+
+    - name: Create First Application Segment
+      willguibr.zpacloud_ansible.zpa_application_segment:
+        state: absent
+        name: Example Application
+        description: Example Application Test
+        enabled: true
+        health_reporting: ON_ACCESS
+        bypass_type: NEVER
+        is_cname_enabled: true
+        tcp_port_range:
+          - from: "80"
+            to: "80"
+        domain_names:
+          - crm1.example.com
+          - crm2.example.com
+        segment_group_id: '{{ }}'
+        server_groups:
+          - id: '{{ item.name}}'
+
+    - name: Create Second Application Segment
+      willguibr.zpacloud_ansible.zpa_application_segment:
+        state: absent
+        name: Example Application
+        description: Example Application Test
+        enabled: true
+        health_reporting: ON_ACCESS
+        bypass_type: NEVER
+        is_cname_enabled: true
+        tcp_port_range:
+          - from: "8080"
+            to: "8085"
+        domain_names:
+          - server1.example.com
+          - server2.example.com
+        segment_group_id: "216196257331291896"
+        server_groups:
+          - id: "216196257331291969"

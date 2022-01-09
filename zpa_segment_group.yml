@@ -1,0 +1,21 @@
+---
+# zpa_segment_group.yml - Create/Update/Delete a Segment Group.
+#
+# Description
+# ===========
+#
+# Quick example of how to use the 'zpa_segment_group' module to create a Segment Group in the ZPA Cloud.
+#
+# This playbook requires proper API credentials to be passed statically or via environment variables for connection to the ZPA Cloud 'zpa_client_id', 'zpa_client_secret' and zpa_customer_id
+# These may be defined as host variables (see `host_vars/zpa_cloud.yml` for an example) or 
+# extra vars.
+#
+# Modules Used
+# ============
+#
+# zpa_segment_group - https://willguibr.github.io/zpacloud_ansible/modules/zpa_segment_group.html
+#
+# Usage
+# =====
+#
+#  $ ansible-playbook zpa_segment_group.yml

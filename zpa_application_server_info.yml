@@ -1,0 +1,49 @@
+---
+# zpa_application_server_info.yml - Get details (ID and/or Name) of a Application Server.
+#
+# Description
+# ===========
+#
+# Quick examples of how to use the 'zpa_application_server_info' module to retrieve  details of an Application Server in the ZPA Cloud.
+#
+# This playbook requires proper API credentials to be passed statically or via environment variables for connection to the ZPA Cloud 'zpa_client_id', 'zpa_client_secret' and zpa_customer_id
+# These may be defined as host variables (see `host_vars/zpa_cloud.yml` for an example) or 
+# extra vars.
+#
+# Modules Used
+# ============
+#
+# zpa_application_server_info - https://willguibr.github.io/zpacloud_ansible/modules/zpa_application_server_info.html
+#
+# Usage
+# =====
+#
+#  $ ansible-playbook zpa_application_server_info.yml
+
+- name: Gather Information Details of All Application Servers
+  hosts: localhost
+
+  tasks:
+
+    - name: Gather Information Details of All Application Servers
+      willguibr.zpacloud_ansible.zpa_application_server_info:
+      register: all_app_server
+
+    - debug:
+        msg: "{{ all_app_server }}"
+
+    - name: Gather Information Details of an Application Server by Name
+      willguibr.zpacloud_ansible.zpa_application_server_info:
+        name: server1.acme.com
+      register: app_server_name
+
+    - debug:
+        msg: "{{ app_server_name }}"
+
+    - name: Gather Information Details of an Application Server by ID
+      willguibr.zpacloud_ansible.zpa_application_server_info:
+        id: "216196257331291921"
+      register: app_server_id
+
+    - debug:
+        msg: "{{ app_server_id }}"

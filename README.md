@@ -18,8 +18,8 @@ for installing Ansible on your machine, but here are quick instructions for popu
 Install from [EPEL](https://fedoraproject.org/wiki/EPEL):
 
 ```
-$ sudo yum install epel-release
-$ sudo yum install ansible
+sudo yum install epel-release
+sudo yum install ansible
 ```
 
 #### Ubuntu
@@ -27,10 +27,10 @@ $ sudo yum install ansible
 Install from the Ansible PPA:
 
 ```
-$ sudo apt update
-$ sudo apt install software-properties-common
-$ sudo apt-add-repository --yes --update ppa:ansible/ansible
-$ sudo apt install ansible
+sudo apt update
+sudo apt install software-properties-common
+sudo apt-add-repository --yes --update ppa:ansible/ansible
+sudo apt install ansible
 ```
 
 #### macOS 10.15
@@ -38,8 +38,8 @@ $ sudo apt install ansible
 Install from Pip (Python package manager):
 
 ```
-$ pip3 install --user ansible
-$ export PATH=$PATH:$HOME/Library/Python/3.7/bin
+pip3 install --user ansible
+export PATH=$PATH:$HOME/Library/Python/3.7/bin
 ```
 
 You'll want to permanently modify the PATH in your shell's config file as well.
@@ -49,10 +49,10 @@ You'll want to permanently modify the PATH in your shell's config file as well.
 Once you're done with installing Ansible, clone this repo, and install the ZPA collection from Ansible Galaxy as well as the Python modules it depends on:
 
 ```
-$ git clone https://github.com/willguibr/zpa-ansible-playbooks.git
-$ cd ansible-playbooks/
-$ ansible-galaxy collection install -r collections/requirements.yml
-$ pip3 install --user -r requirements.txt
+git clone https://github.com/willguibr/zpa-ansible-playbooks.git
+cd ansible-playbooks/
+ansible-galaxy collection install -r collections/requirements.yml
+pip3 install --user -r requirements.txt
 ```
 
 ### Customize connection parameters
@@ -60,7 +60,7 @@ $ pip3 install --user -r requirements.txt
 The supplied inventory sets variables for each host in the `host_vars` directory.  Authentication credentials are not included, and should be specified either on the CLI, or in a seperate file like so:
 
 ```
-$ ansible-playbook -i inventory check_ready.yml -e @creds.yml
+ansible-playbook -i inventory check_ready.yml -e @creds.yml
 ```
 
 You're now ready to start using these playbooks.
@@ -70,19 +70,34 @@ You're now ready to start using these playbooks.
 You can use these playbooks as a base by cloning this repository.  Each of them is documented with how to run them via
 `ansible-playbook` and their customization options.
 
-* check_ready.yml - Checks to see if a firewall is ready via 'show chassis-ready' command.
-* download_panos_version.yml - Downloads a PAN-OS version to a device.
-* fw_config_lock.yml - Handle firewall config locking.
-* fw_objects.yml - Create various objects on a PAN-OS device.
-* fw_rule_survey.yml - Add security rule via Ansible Tower survey.
-* fw_rules.yml - Create security rules on a PAN-OS device.
-* fw_shutdown.yml - Shuts down a PAN-OS device.
-* session_report.yml - Generates a report on long sessions.
-* show_changes.yml - Checks for uncommitted changes and commits if necessary.
-* upgrade_content.yml - Upgrade the content version on a PAN-OS device.
-* upgrade_ha.yml - PAN-OS HA pair upgrade playbook.
-* upgrade_ha_major.yml - PAN-OS HA pair major version upgrade playbook.
-* upgrade_panorama_ha.yml - Panorama HA upgrade playbook.
-* upgrade_panorama_ha_major.yml - Panorama HA major version upgrade playbook.
-* upgrade_single.yml - PAN-OS single firewall upgrade playbook.
-* upgrade_single_major.yml - PAN-OS single firewall major version upgrade playbook.
+* zpa_app_connector_groups.yml - Create/Update/Delete an app connector group.
+* zpa_app_connector_groups_info.yml - Gather information details (ID and/or Name) of a app connector group.
+* zpa_application_segment.yml - Create/Update/Delete an application segment.
+* zpa_application_segment_info.yml - Gather information details (ID and/or Name) of a application segment.
+* zpa_application_server.yml - Create/Update/Delete an Application Server.
+* zpa_application_server_info.yml - Gather information details (ID and/or Name) of an application server.
+* zpa_ba_certificate_info.yml - Gather information details (ID and/or Name) of an browser access certificate.
+* zpa_cloud_connector_group_info.yml - Gather information details (ID and/or Name) of an cloud connector group.
+* zpa_customer_version_profile_info.yml - Gather information details (ID and/or Name) of an customer version profile for use in app connector group resource in the `version_profile_id` parameter.
+* zpa_enrollment_cert_info.yml - Gather information details (ID and/or Name) of an enrollment certificate for use when creating provisioning keys for connector groups or service edge groups.
+* zpa_idp_controller_info.yml - Gather information details (ID and/or Name) of an identity provider (IdP) created in the ZPA tenant.
+* zpa_machine_group_info.yml - Gather information details (ID and/or Name) of an machine group for use in a policy access and/or forwarding rules.
+* zpa_policy_access_rule.yml - Create/Update/Delete a policy access rule.
+* zpa_policy_access_rule_info.yml - Gather information details (ID and/or Name) of a policy access rule.
+* zpa_policy_access_timeout_rule.yml - Create/Update/Delete a policy access timeout rule.
+* zpa_policy_access_timeout_rule_info.yml - Gather information details (ID and/or Name) of a policy access timeout rule.
+* zpa_policy_access_forwarding_rule.yml - Create/Update/Delete a policy access forwarding rule.
+* zpa_policy_access_forwarding_rule_info.yml - Gather information details (ID and/or Name) of a policy access forwarding rule.
+* zpa_posture_profile_info.yml - Gather information details (ID and/or Name) of a posture profile to use in a policy access, timeout or forwarding rules.
+* zpa_provisioning_key.yml - Create/Update/Delete a provisioning key.
+* zpa_provisioning_key_info.yml - Gather information details (ID and/or Name) of a provisioning key.
+* zpa_saml_attribute_info.yml - Gather information details (ID and/or Name) of a saml attribute.
+* zpa_scim_attribute_header_info.yml - Gather information details (ID and/or Name) of a scim attribute header.
+* zpa_scim_group_info.yml - Gather information details (ID and/or Name) of a scim group.
+* zpa_segment_group.yml - Create/Update/Delete a segment group.
+* zpa_segment_group_info - Gather information details (ID and/or Name) of a segment group.
+* zpa_server_group.yml - Create/Update/Delete a segment group.
+* zpa_server_group_info - Gather information details (ID and/or Name) of a server group.
+* zpa_service_edge_group_info - Gather information details (ID and/or Name) of a service edge group.
+* zpa_service_edge_group.yml - Create/Update/Delete an service edge group.
+* zpa_trusted_network_info.yml - Gather information details (ID and/or Name) of a trusted network for use in a policy access and/or forwarding rules.

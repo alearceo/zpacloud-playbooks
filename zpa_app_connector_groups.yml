@@ -1,19 +1,58 @@
+---
+# zpa_app_connector_groups.yml - Create/Update/Delete an App Connector Group.
+#
+# Description
+# ===========
+#
+# Quick examples of how to use the 'zpa_app_connector_groups' module to create an App Connector Group in the ZPA Cloud.
+#
+# This playbook requires proper API credentials to be passed statically or via environment variables for connection to the ZPA Cloud 'zpa_client_id', 'zpa_client_secret' and zpa_customer_id
+# These may be defined as host variables (see `host_vars/zpa_cloud.yml` for an example) or 
+# extra vars.
+#
+# Modules Used
+# ============
+#
+# zpa_app_connector_groups - https://willguibr.github.io/zpacloud_ansible/modules/zpa_app_connector_groups.html
+#
+# Usage
+# =====
+#
+#  $ ansible-playbook zpa_app_connector_groups.yml
 
-
-- hosts: '{{ target | default("zpa") }}'
-  connection: local
-
-  vars:
-    zpa:
-      zpa_base_url: '{{base_url}}'
-      zpa_client_id: '{{ client_id | default(omit) }}'
-      zpa_client_secret: '{{ secret | default(omit) }}'
-      zpa_customer_id: '{{ customer_id | default(omit) }}'
+- name: Create ZPA App Connector Groups
+  hosts: localhost
 
   tasks:
-    - name: Create app connector groups
-      willguibr.zpa.zpa_app_connector_groups:
-        provider: '{{zpa}}'
-        name: '{{}}'
-        description: '{{}}'
+  
+    - name: Create First App Connector Group
+      willguibr.zpacloud_ansible.zpa_app_connector_groups:
+        name: "Example1"
+        description: "Example1"
         enabled: true
+        city_country: "California, US"
+        country_code: "US"
+        latitude: "37.3382082"
+        longitude: "-121.8863286"
+        location: "San Jose, CA, USA"
+        upgrade_day: "SUNDAY"
+        upgrade_time_in_secs: "66600"
+        override_version_profile: true
+        version_profile_id: "0"
+        dns_query_type: "IPV4"
+
+    - name: Create Second App Connector Group
+      willguibr.zpacloud_ansible.zpa_app_connector_groups:
+        name: "Example"
+        description: "Example2"
+        enabled: true
+        city_country: "New York, US"
+        country_code: "US"
+        latitude: "40.7128"
+        longitude: "74.0060"
+        location: "New York, NY, USA"
+        upgrade_day: "SUNDAY"
+        upgrade_time_in_secs: "66600"
+        override_version_profile: true
+        version_profile_id: "0"
+        dns_query_type: "IPV4"

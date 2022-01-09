@@ -1,0 +1,41 @@
+---
+# zpa_application_server.yml - Create/Update/Delete an Application Server.
+#
+# Description
+# ===========
+#
+# Quick example of how to use the 'zpa_application_server' module to create a Application Serverin the ZPA Cloud.
+#
+# This playbook requires proper API credentials to be passed statically or via environment variables for connection to the ZPA Cloud 'zpa_client_id', 'zpa_client_secret' and zpa_customer_id
+# These may be defined as host variables (see `host_vars/zpa_cloud.yml` for an example) or 
+# extra vars.
+#
+# Modules Used
+# ============
+#
+# zpa_application_server - https://willguibr.github.io/zpacloud_ansible/modules/zpa_application_server.html
+#
+# Usage
+# =====
+#
+#  $ ansible-playbook zpa_application_server.yml
+
+- name: Create ZPA Application Servers
+  hosts: localhost
+
+  tasks:
+    - name: Create First Application Server
+      willguibr.zpacloud_ansible.zpa_application_server:
+        name: Example
+        description: Example
+        address: example.acme.com
+        enabled: true
+
+    - name: Create Second Application Server
+      willguibr.zpacloud_ansible.zpa_application_server:
+        name: Example1
+        description: Example1
+        address: example.acme.com
+        enabled: true
+        app_server_group_ids: []
+

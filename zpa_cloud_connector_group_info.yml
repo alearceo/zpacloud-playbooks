@@ -1,0 +1,48 @@
+---
+# zpa_cloud_connector_group_info.yml - Get details (ID and/or Name) of a cloud connector group resource.
+#
+# Description
+# ===========
+#
+# Quick example of how to use the 'zpa_cloud_connector_group_info' module to retrieve a Cloud Connector Group detail from the ZPA Cloud.
+#
+# This playbook requires proper API credentials to be passed statically or via environment variables for connection to the ZPA Cloud 'zpa_client_id', 'zpa_client_secret' and zpa_customer_id
+# These may be defined as host variables (see `host_vars/zpa_cloud.yml` for an example) or 
+# extra vars.
+#
+# Modules Used
+# ============
+#
+# zpa_cloud_connector_group_info - https://willguibr.github.io/zpacloud_ansible/modules/zpa_cloud_connector_group_info.html
+#
+# Usage
+# =====
+#
+#  $ ansible-playbook zpa_cloud_connector_group_info.yml
+
+- name: Gather Information Details of All Cloud Connector Groups
+  hosts: localhost
+
+  tasks:
+    - name: Gather Information Details of All Cloud Connector Groups
+      willguibr.zpacloud_ansible.zpa_cloud_connector_group_info:
+      register: all_cloud_connector_groups
+
+    - debug:
+        msg: "{{ all_cloud_connector_groups }}"
+
+    - name: Gather Information Details of a Cloud Connector Group by Name
+      willguibr.zpacloud_ansible.zpa_cloud_connector_group_info:
+        name: zs-cc-vpc-096108eb5d9e68d71-ca-central-1a
+      register: cloud_connector_group_name
+
+    - debug:
+        msg: "{{ cloud_connector_group_name }}"
+
+    - name: Gather Information Details of a Cloud Connector Group by ID
+      willguibr.zpacloud_ansible.zpa_cloud_connector_group_info:
+        id: "216196257331292017"
+      register: cloud_connector_group_id
+
+    - debug:
+        msg: "{{ cloud_connector_group_id }}"

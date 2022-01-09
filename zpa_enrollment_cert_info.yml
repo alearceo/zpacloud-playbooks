@@ -1,0 +1,72 @@
+---
+# zpa_enrollment_cert_info.yml - Get details (ID and/or Name) of an enrollment certificate resource.
+#
+# Description
+# ===========
+#
+# Quick example of how to use the 'zpa_enrollment_cert_info' module to retrieve a Enrollment Certificate detail from the ZPA Cloud.
+#
+# This playbook requires proper API credentials to be passed statically or via environment variables for connection to the ZPA Cloud 'zpa_client_id', 'zpa_client_secret' and zpa_customer_id
+# These may be defined as host variables (see `host_vars/zpa_cloud.yml` for an example) or 
+# extra vars.
+#
+# Modules Used
+# ============
+#
+# zpa_enrollment_cert_info - https://willguibr.github.io/zpacloud_ansible/modules/zpa_enrollment_cert_info.html
+#
+# Usage
+# =====
+#
+#  $ ansible-playbook zpa_enrollment_cert_info.yml
+
+- name: Gather Information Details of All Enrollment Certificates
+  hosts: localhost
+
+  tasks:
+    - name: Gather Information Details of All Enrollment Certificates
+      willguibr.zpacloud_ansible.zpa_enrollment_cert_info:
+      register: all_enrollment_certs
+
+    - debug:
+        msg: "{{ all_enrollment_certs }}"
+
+    - name: Gather Information Details of the Root Enrollment Certificates by Name
+      willguibr.zpacloud_ansible.zpa_enrollment_cert_info:
+        name: "Root"
+      register: enrollment_cert_root
+
+    - debug:
+        msg: "{{ enrollment_cert_root }}"
+
+    - name: Gather Information Details of the Client Enrollment Certificates by Name
+      willguibr.zpacloud_ansible.zpa_enrollment_cert_info:
+        name: "Client"
+      register: enrollment_cert_client
+
+    - debug:
+        msg: "{{ enrollment_cert_client }}"
+
+    - name: Gather Information Details of the Connector Enrollment Certificates by Name
+      willguibr.zpacloud_ansible.zpa_enrollment_cert_info:
+        name: "Connector"
+      register: enrollment_cert_connector
+
+    - debug:
+        msg: "{{ enrollment_cert_connector }}"
+
+    - name: Gather Information Details of the Service Edge Enrollment Certificates by Name
+      willguibr.zpacloud_ansible.zpa_enrollment_cert_info:
+        name: "Service Edge"
+      register: enrollment_cert_service_edge
+
+    - debug:
+        msg: "{{ enrollment_cert_service_edge }}"
+
+    - name: Gather Information Details of the Isolation Client Enrollment Certificates by Name
+      willguibr.zpacloud_ansible.zpa_enrollment_cert_info:
+        name: "Isolation Client"
+      register: enrollment_cert_isolation_client
+
+    - debug:
+        msg: "{{ enrollment_cert_isolation_client }}"

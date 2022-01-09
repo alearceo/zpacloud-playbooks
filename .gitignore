@@ -8,3 +8,7 @@ prod_creds.yml
 *.retry
 **/venv/*
 **/.vscode/*
+local_test/
+local_test/*
+all_together/
+all_together/*

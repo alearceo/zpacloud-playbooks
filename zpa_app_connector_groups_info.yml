@@ -1,0 +1,50 @@
+
+---
+# zpa_app_connector_groups_info.yml - Get details (ID and/or Name) of a App Connector Group.
+#
+# Description
+# ===========
+#
+# Quick examples of how to use the 'zpa_app_connector_groups_info' module to retrieve  details of an App Connector Group in the ZPA Cloud.
+#
+# This playbook requires proper API credentials to be passed statically or via environment variables for connection to the ZPA Cloud 'zpa_client_id', 'zpa_client_secret' and zpa_customer_id
+# These may be defined as host variables (see `host_vars/zpa_cloud.yml` for an example) or 
+# extra vars.
+#
+# Modules Used
+# ============
+#
+# zpa_app_connector_groups_info - https://willguibr.github.io/zpacloud_ansible/modules/zpa_app_connector_groups_info.html
+#
+# Usage
+# =====
+#
+#  $ ansible-playbook zpa_app_connector_groups_info.yml
+
+- name: Gather Details of All App Connector Groups
+  hosts: localhost
+
+  tasks:
+  
+    - name: Gather Details of all App Connector Groups
+      willguibr.zpacloud_ansible.zpa_app_connector_groups_info:
+      register: all_app_connector
+
+    - debug:
+        msg: "{{ all_app_connector }}"
+
+    - name: Gather Details of a Specific App Connector Groups by Name
+      willguibr.zpacloud_ansible.zpa_app_connector_groups_info:
+        name: "Example App Connector Group"
+      register: app_connector_name
+
+    - debug:
+        msg: "{{ app_connector_name }}"
+
+    - name: Gather Details of a Specific App Connector Groups by ID
+      willguibr.zpacloud_ansible.zpa_app_connector_groups_info:
+        id: "216196257331292046"
+      register: app_connector_id
+
+    - debug:
+        msg: "{{ app_connector_id }}"

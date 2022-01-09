@@ -1,0 +1,53 @@
+---
+# zpa_customer_version_profile_info.yml - Get details (ID and/or Name) of a customer version profile.
+#
+# Description
+# ===========
+#
+# Quick example of how to use the 'zpa_customer_version_profile_info' module to retrieve a Customer Version Profile detail from the ZPA Cloud.
+#
+# This playbook requires proper API credentials to be passed statically or via environment variables for connection to the ZPA Cloud 'zpa_client_id', 'zpa_client_secret' and zpa_customer_id
+# These may be defined as host variables (see `host_vars/zpa_cloud.yml` for an example) or 
+# extra vars.
+#
+# Customer Version Profiles are of 3 name types:
+# * name: Default, and id: 0
+# * name: Previous Default and id: 1
+# * name: New Release and id: 2
+#
+# Modules Used
+# ============
+#
+# zpa_customer_version_profile_info - https://willguibr.github.io/zpacloud_ansible/modules/zpa_customer_version_profile_info.html
+#
+# Usage
+# =====
+#
+#  $ ansible-playbook zpa_customer_version_profile_info.yml
+
+- name: Gather Information Details of All Customer Version Profiles
+  hosts: localhost
+
+  tasks:
+    - name: Gather Information Details of All Customer Version Profiles
+      willguibr.zpacloud_ansible.zpa_customer_version_profile_info:
+      register: all_customer_version_profiles
+
+    - debug:
+        msg: "{{ all_customer_version_profiles }}"
+
+    - name: Gather Information Details of a Cloud Connector Group by Name
+      willguibr.zpacloud_ansible.zpa_customer_version_profile_info:
+        name: "New Release"
+      register: version_profile_name
+
+    - debug:
+        msg: "{{ version_profile_name }}"
+
+    - name: Gather Information Details of a Cloud Connector Group by ID
+      willguibr.zpacloud_ansible.zpa_customer_version_profile_info:
+        id: "2"
+      register: version_profile_id
+
+    - debug:
+        msg: "{{ version_profile_id }}"

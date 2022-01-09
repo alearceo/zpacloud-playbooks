@@ -1,0 +1,42 @@
+---
+# zpa_service_edge_groups.yml - Create/Update/Delete a Service Edge Group.
+#
+# Description
+# ===========
+#
+# Quick example of how to use the 'zpa_service_edge_groups' module to create a Service Edge Group in the ZPA Cloud.
+#
+# This playbook requires proper API credentials to be passed statically or via environment variables for connection to the ZPA Cloud 'zpa_client_id', 'zpa_client_secret' and zpa_customer_id
+# These may be defined as host variables (see `host_vars/zpa_cloud.yml` for an example) or 
+# extra vars.
+#
+# Modules Used
+# ============
+#
+# zpa_service_edge_groups - https://willguibr.github.io/zpacloud_ansible/modules/zpa_service_edge_groups.html
+#
+# Usage
+# =====
+#
+#  $ ansible-playbook zpa_service_edge_groups.yml
+
+- name: Create ZPA Service Edge Group
+  hosts: localhost
+
+  tasks:
+
+    - name: Create/Update/Delete Service Edge Group
+      willguibr.zpacloud_ansible.zpa_service_edge_groups:
+        name: "Example"
+        description: "Example1"
+        enabled: true
+        city_country: "California, US"
+        country_code: "US"
+        latitude: "37.3382082"
+        longitude: "-121.8863286"
+        location: "San Jose, CA, USA"
+        upgrade_day: "SUNDAY"
+        upgrade_time_in_secs: "66600"
+        override_version_profile: true
+        version_profile_id: "0"
+
