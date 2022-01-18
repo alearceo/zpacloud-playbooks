@@ -13,7 +13,7 @@
 # Modules Used
 # ============
 #
-# zpa_application_segment - https://willguibr.github.io/zpacloud_ansible/modules/zpa_application_segment.html
+# zpa_application_segment - https://willguibr.github.io/zpacloud-ansible/modules/zpa_application_segment.html
 #
 # Usage
 # =====
@@ -25,7 +25,23 @@
 
   tasks:
 
-    - name: Create First Application Segment
+    - name: Create a Server Group
+      willguibr.zpacloud_ansible.zpa_server_group_info:
+        name: "All Other Services"
+      register: server_group_id
+
+    - debug:
+        msg: "{{ server_group_id.data.0.id }}"
+
+    - name: Create a Segment Group
+      willguibr.zpacloud_ansible.zpa_segment_group_info:
+        name: "All Other Services"
+      register: segment_group_id
+
+    - debug:
+        msg: "{{ segment_group_id.data.0.id }}"
+
+    - name: Create an Application Segment
       willguibr.zpacloud_ansible.zpa_application_segment:
         state: absent
         name: Example Application
@@ -40,25 +56,10 @@
         domain_names:
           - crm1.example.com
           - crm2.example.com
-        segment_group_id: '{{ }}'
+        segment_group_id: "{{ segment_group_id.data.0.id }}"
         server_groups:
-          - id: '{{ item.name}}'
+          - id: "{{ server_group_id.data.0.id }}"
+      register: application_segment
 
-    - name: Create Second Application Segment
-      willguibr.zpacloud_ansible.zpa_application_segment:
-        state: absent
-        name: Example Application
-        description: Example Application Test
-        enabled: true
-        health_reporting: ON_ACCESS
-        bypass_type: NEVER
-        is_cname_enabled: true
-        tcp_port_range:
-          - from: "8080"
-            to: "8085"
-        domain_names:
-          - server1.example.com
-          - server2.example.com
-        segment_group_id: "216196257331291896"
-        server_groups:
-          - id: "216196257331291969"
+    - debug:
+        msg: "{{ application_segment }}"

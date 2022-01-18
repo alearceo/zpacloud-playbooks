@@ -1,0 +1,32 @@
+---
+# zpa_browser_access_info.yml - Create/Update/Delete an Application Segment.
+#
+# Description
+# ===========
+#
+# Quick examples of how to use the 'zpa_browser_access_info' module to create an Application Segment in the ZPA Cloud.
+#
+# This playbook requires proper API credentials to be passed statically or via environment variables for connection to the ZPA Cloud 'zpa_client_id', 'zpa_client_secret' and zpa_customer_id
+# These may be defined as host variables (see `host_vars/zpa_cloud.yml` for an example) or 
+# extra vars.
+#
+# Modules Used
+# ============
+#
+# zpa_browser_access_info - https://willguibr.github.io/zpacloud-ansible/modules/zpa_browser_access_info.html
+#
+# Usage
+# =====
+#
+#  $ ansible-playbook zpa_browser_access_info.yml
+
+- name: App segment
+  hosts: localhost
+  tasks:
+    - name: Gather information about all App segment
+      willguibr.zpacloud_ansible.zpa_browser_access_info:
+        name: "Browser Access Apps"
+      register: app
+    - name: app segment
+      debug:
+        msg: "{{ app }}"

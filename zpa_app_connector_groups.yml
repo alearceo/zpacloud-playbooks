@@ -13,7 +13,7 @@
 # Modules Used
 # ============
 #
-# zpa_app_connector_groups - https://willguibr.github.io/zpacloud_ansible/modules/zpa_app_connector_groups.html
+# zpa_app_connector_groups - https://willguibr.github.io/zpacloud-ansible/modules/zpa_app_connector_groups.html
 #
 # Usage
 # =====
@@ -25,8 +25,15 @@
 
   tasks:
   
-    - name: Create First App Connector Group
-      willguibr.zpacloud_ansible.zpa_app_connector_groups:
+    - name: Gather Information Details of All Customer Version Profiles
+      willguibr.zpacloud.zpa_customer_version_profile_info:
+      register: version_profile_id
+
+    - debug:
+        msg: "{{ version_profile_id }}"
+
+    - name: Create First App Connector Group Example1
+      willguibr.zpacloud.zpa_app_connector_groups:
         name: "Example1"
         description: "Example1"
         enabled: true
@@ -38,12 +45,12 @@
         upgrade_day: "SUNDAY"
         upgrade_time_in_secs: "66600"
         override_version_profile: true
-        version_profile_id: "0"
+        version_profile_id: "{{ version_profile_id.data.0.id }}"
         dns_query_type: "IPV4"
 
-    - name: Create Second App Connector Group
-      willguibr.zpacloud_ansible.zpa_app_connector_groups:
-        name: "Example"
+    - name: Create Second App Connector Group Example2
+      willguibr.zpacloud.zpa_app_connector_groups:
+        name: "Example2"
         description: "Example2"
         enabled: true
         city_country: "New York, US"
@@ -54,5 +61,22 @@
         upgrade_day: "SUNDAY"
         upgrade_time_in_secs: "66600"
         override_version_profile: true
-        version_profile_id: "0"
+        version_profile_id: "{{ version_profile_id.data.1.id }}"
         dns_query_type: "IPV4"
+
+    - name: Create Second App Connector Group Example3
+      willguibr.zpacloud.zpa_app_connector_groups:
+        name: "Example3"
+        description: "Example3"
+        enabled: true
+        city_country: "New York, US"
+        country_code: "US"
+        latitude: "40.7128"
+        longitude: "74.0060"
+        location: "New York, NY, USA"
+        upgrade_day: "SUNDAY"
+        upgrade_time_in_secs: "66600"
+        override_version_profile: true
+        version_profile_id: "{{ version_profile_id.data.2.id }}"
+        dns_query_type: "IPV4"
+

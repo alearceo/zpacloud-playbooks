@@ -13,7 +13,7 @@
 # Modules Used
 # ============
 #
-# zpa_machine_group_info - https://willguibr.github.io/zpacloud_ansible/modules/zpa_machine_group_info.html
+# zpa_machine_group_info - https://willguibr.github.io/zpacloud-ansible/modules/zpa_machine_group_info.html
 #
 # Usage
 # =====
@@ -25,14 +25,14 @@
 
   tasks:
     - name: Gather Details of All Machine Groups
-      willguibr.zpacloud_ansible.zpa_machine_group_info:
+      willguibr.zpacloud.zpa_machine_group_info:
       register: machine_groups
 
     - debug:
       msg: "{{ machine_groups }}"
 
     - name: Gather Details of a Specific Machine Group by Name
-      willguibr.zpacloud_ansible.zpa_machine_group_info:
+      willguibr.zpacloud.zpa_machine_group_info:
         name: "Corp_Machine_Group"
       register: machine_group_name
 
@@ -40,7 +40,7 @@
       msg: "{{ machine_group_name }}"
 
     - name: Gather Details of a Specific Machine Group by ID
-      willguibr.zpacloud_ansible.zpa_machine_group_info:
+      willguibr.zpacloud.zpa_machine_group_info:
         id: "216196257331282583"
       register: machine_group_id
 

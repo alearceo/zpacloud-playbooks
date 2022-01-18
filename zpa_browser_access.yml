@@ -1,0 +1,73 @@
+---
+# zpa_browser_access.yml - Create/Update/Delete an Browser Access Application Segment.
+#
+# Description
+# ===========
+#
+# Quick examples of how to use the 'zpa_browser_access' module to create a Browser Access Application Segment in the ZPA Cloud.
+#
+# This playbook requires proper API credentials to be passed statically or via environment variables for connection to the ZPA Cloud 'zpa_client_id', 'zpa_client_secret' and zpa_customer_id
+# These may be defined as host variables (see `host_vars/zpa_cloud.yml` for an example) or 
+# extra vars.
+#
+# Modules Used
+# ============
+#
+# zpa_applicationzpa_browser_access_segment - https://willguibr.github.io/zpacloud-ansible/modules/zpa_browser_access.html
+#
+# Usage
+# =====
+#
+#  $ ansible-playbook zpa_browser_access.yml
+
+- name: Browser Access Application Segment
+  hosts: localhost
+  tasks:
+
+    - name: Create a Server Group
+      willguibr.zpacloud_ansible.zpa_server_group_info:
+        name: "All Other Services"
+      register: server_group_id
+
+    - name: Create a Segment Group
+      willguibr.zpacloud_ansible.zpa_segment_group_info:
+        name: "All Other Services"
+      register: segment_group_id
+
+    - name: Gather Details of a Specific Browser Certificates by Name
+      willguibr.zpacloud_ansible.zpa_ba_certificate_info:
+        name: sales.securitygeek.io
+      register: certificate_name
+
+    - debug:
+        msg: "{{ certificate_name }}"
+
+    - name: Browser Access Application Segment
+      willguibr.zpacloud_ansible.zpa_browser_access:
+        name: Example
+        description: Example
+        enabled: true
+        health_reporting: ON_ACCESS
+        bypass_type: NEVER
+        is_cname_enabled: true
+        tcp_port_range:
+          - from: "80"
+            to: "80"
+        domain_names:
+          - crm1.example.com
+          - crm2.example.com
+        segment_group_id: "{{ segment_group_id.data.id }}"
+        server_groups:
+          - id: "{{ server_group_id.data.id }}"
+        clientless_apps:
+            name: "sales.securitygeek.io"
+            application_protocol: "HTTP"
+            application_port: "80"
+            certificate_id: "{{ certificate_name.data.id }}"
+            trust_untrusted_cert: true
+            enabled: true
+            domain: "sales.securitygeek.io"
+      register: browser_access_app
+
+    - debug:
+        msg: "{{ browser_access_app }}"

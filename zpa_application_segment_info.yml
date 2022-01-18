@@ -13,7 +13,7 @@
 # Modules Used
 # ============
 #
-# zpa_application_segment_info - https://willguibr.github.io/zpacloud_ansible/modules/zpa_application_segment_info.html
+# zpa_application_segment_info - https://willguibr.github.io/zpacloud-ansible/modules/zpa_application_segment_info.html
 #
 # Usage
 # =====
@@ -26,14 +26,14 @@
   tasks:
 
     - name: Gather Details of All Application Segments
-      willguibr.zpacloud_ansible.zpa_application_segment_info:
+      willguibr.zpacloud.zpa_application_segment_info:
       register: all_app_segments
 
     - debug:
         msg: "{{ all_app_segments }}"
 
     - name: Gather Details of a Specific Application Segments by Name
-      willguibr.zpacloud_ansible.zpa_application_segment_info:
+      willguibr.zpacloud.zpa_application_segment_info:
         name: "Example Application Segment"
       register: app_segment_name
       
@@ -41,7 +41,7 @@
         msg: "{{ app_segment_name }}"
 
     - name: Gather Details of a Specific Application Segments by ID
-      willguibr.zpacloud_ansible.zpa_application_segment_info:
+      willguibr.zpacloud.zpa_application_segment_info:
         id: "216196257331291981"
       register: app_segment_id
       

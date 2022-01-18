@@ -13,7 +13,7 @@
 # Modules Used
 # ============
 #
-# zpa_provisioning_key_info - https://willguibr.github.io/zpacloud_ansible/modules/zpa_provisioning_key.html
+# zpa_provisioning_key_info - https://willguibr.github.io/zpacloud-ansible/modules/zpa_provisioning_key.html
 #
 # Usage
 # =====
@@ -28,7 +28,7 @@
   tasks:
 
     - name: Gather Details of All CONNECTOR_GRP Provisioning Keys
-      willguibr.zpacloud_ansible.zpa_provisioning_key_info:
+      willguibr.zpacloud.zpa_provisioning_key_info:
         association_type: "CONNECTOR_GRP"
       register: all_connector_grp_keys
 
@@ -36,7 +36,7 @@
         msg: "{{ all_connector_grp_keys }}"
 
     - name: Gather Details of All CONNECTOR_GRP Provisioning Keys by Name
-      willguibr.zpacloud_ansible.zpa_provisioning_key_info:
+      willguibr.zpacloud.zpa_provisioning_key_info:
         name: "Example App Connector Group"
         association_type: "CONNECTOR_GRP"
       register: connector_grp_key_name
@@ -45,7 +45,7 @@
         msg: "{{ connector_grp_key_name }}"
 
     - name: Gather Details of All CONNECTOR_GRP Provisioning Keys by ID
-      willguibr.zpacloud_ansible.zpa_provisioning_key_info:
+      willguibr.zpacloud.zpa_provisioning_key_info:
         id: "8691"
         association_type: "CONNECTOR_GRP"
       register: connector_grp_key_id
@@ -62,7 +62,7 @@
   tasks:
 
     - name: Gather Details of All SERVICE_EDGE_GRP Provisioning Keys
-      willguibr.zpacloud_ansible.zpa_provisioning_key_info:
+      willguibr.zpacloud.zpa_provisioning_key_info:
         association_type: "SERVICE_EDGE_GRP"
       register: all_edge_grp_key_name
 
@@ -70,7 +70,7 @@
         msg: "{{ all_edge_grp_key_name }}"
 
     - name: Gather Details of All SERVICE_EDGE_GRP Provisioning Keys by Name
-      willguibr.zpacloud_ansible.zpa_provisioning_key_info:
+      willguibr.zpacloud.zpa_provisioning_key_info:
         name: "Example Service Edge Group"
         association_type: "SERVICE_EDGE_GRP"
       register: edge_grp_key_name
@@ -79,7 +79,7 @@
         msg: "{{ edge_grp_key_name }}"
 
     - name: Gather Details of All SERVICE_EDGE_GRP Provisioning Keys by ID
-      willguibr.zpacloud_ansible.zpa_provisioning_key_info:
+      willguibr.zpacloud.zpa_provisioning_key_info:
         id: "8691"
         association_type: "SERVICE_EDGE_GRP"
       register: edge_grp_key_id

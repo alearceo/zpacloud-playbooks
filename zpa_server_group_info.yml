@@ -1,0 +1,49 @@
+---
+# zpa_server_group_info.yml - Get details (ID and/or Name) of a server group.
+#
+# Description
+# ===========
+#
+# Quick example of how to use the 'zpa_server_group_info' module to retrieve details of a Server Group in the ZPA Cloud.
+#
+# This playbook requires proper API credentials to be passed statically or via environment variables for connection to the ZPA Cloud 'zpa_client_id', 'zpa_client_secret' and zpa_customer_id
+# These may be defined as host variables (see `host_vars/zpa_cloud.yml` for an example) or 
+# extra vars.
+#
+# Modules Used
+# ============
+#
+# zpa_server_group_info - https://willguibr.github.io/zpacloud-ansible/modules/zpa_server_group_info.html
+#
+# Usage
+# =====
+#
+#  $ ansible-playbook zpa_server_group_info.yml
+
+- name: Gather Details of All Server Groups
+  hosts: localhost
+
+  tasks:
+  
+    - name: Gather Details of All Server Groups
+      willguibr.zpacloud.zpa_server_group_info:
+      register: all_server_groups
+
+    - debug:
+        msg: "{{ all_server_groups }}"
+
+    - name: Gather Details of All Server Groups by Name
+      willguibr.zpacloud.zpa_server_group_info:
+        name: Example1
+      register: server_group_name
+
+    - debug:
+        msg: "{{ server_group_name }}"
+
+    - name: Gather Details of All Server Groups by ID
+      willguibr.zpacloud.zpa_server_group_info:
+        id: "216196257331291969"
+      register: server_group_id
+
+    - debug:
+        msg: "{{ server_group_id }}"

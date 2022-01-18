@@ -14,7 +14,7 @@
 # Modules Used
 # ============
 #
-# zpa_app_connector_groups_info - https://willguibr.github.io/zpacloud_ansible/modules/zpa_app_connector_groups_info.html
+# zpa_app_connector_groups_info - https://willguibr.github.io/zpacloud-ansible/modules/zpa_app_connector_groups_info.html
 #
 # Usage
 # =====
@@ -27,14 +27,14 @@
   tasks:
   
     - name: Gather Details of all App Connector Groups
-      willguibr.zpacloud_ansible.zpa_app_connector_groups_info:
+      willguibr.zpacloud.zpa_app_connector_groups_info:
       register: all_app_connector
 
     - debug:
         msg: "{{ all_app_connector }}"
 
     - name: Gather Details of a Specific App Connector Groups by Name
-      willguibr.zpacloud_ansible.zpa_app_connector_groups_info:
+      willguibr.zpacloud.zpa_app_connector_groups_info:
         name: "Example App Connector Group"
       register: app_connector_name
 
@@ -42,7 +42,7 @@
         msg: "{{ app_connector_name }}"
 
     - name: Gather Details of a Specific App Connector Groups by ID
-      willguibr.zpacloud_ansible.zpa_app_connector_groups_info:
+      willguibr.zpacloud.zpa_app_connector_groups_info:
         id: "216196257331292046"
       register: app_connector_id
 

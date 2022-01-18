@@ -13,7 +13,7 @@
 # Modules Used
 # ============
 #
-# zpa_idp_controller_info - https://willguibr.github.io/zpacloud_ansible/modules/zpa_idp_controller_info.html
+# zpa_idp_controller_info - https://willguibr.github.io/zpacloud-ansible/modules/zpa_idp_controller_info.html
 #
 # Usage
 # =====
@@ -25,14 +25,14 @@
 
   tasks:
     - name: Gather Details of All IdP Controllers
-      willguibr.zpacloud_ansible.zpa_idp_controller_info:
+      willguibr.zpacloud.zpa_idp_controller_info:
       register: idp_controllers
 
     - debug:
       msg: "{{ idp_controllers }}"
 
     - name: Gather Details of a Specific IdP Controller by Name
-      willguibr.zpacloud_ansible.zpa_idp_controller_info:
+      willguibr.zpacloud.zpa_idp_controller_info:
         name: User_IdP_Name
       register: idp_name
 
@@ -40,7 +40,7 @@
       msg: "{{ idp_name }}"
 
     - name: Gather Details of a Specific IdP Controller by ID
-      willguibr.zpacloud_ansible.zpa_idp_controller_info:
+      willguibr.zpacloud.zpa_idp_controller_info:
         id: "216196257331282583"
       register: idp_id
 

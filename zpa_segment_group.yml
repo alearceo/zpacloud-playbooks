@@ -13,9 +13,26 @@
 # Modules Used
 # ============
 #
-# zpa_segment_group - https://willguibr.github.io/zpacloud_ansible/modules/zpa_segment_group.html
+# zpa_segment_group - https://willguibr.github.io/zpacloud-ansible/modules/zpa_segment_group.html
 #
 # Usage
 # =====
 #
 #  $ ansible-playbook zpa_segment_group.yml
+
+- name: Create/Update/Delete a Server Group
+  hosts: localhost
+
+  tasks:
+    - name: Create/Update/Delete a Server Group
+      willguibr.zpacloud.zpa_segment_group:
+        config_space: "DEFAULT"
+        name: Example Segment Group
+        description: Example Segment Group
+        enabled: true
+        policy_migrated: true
+        tcp_keep_alive_enabled: "1"
+      register: segment_group
+
+    - debug:
+        msg: "{{ segment_group }}"

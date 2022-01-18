@@ -13,7 +13,7 @@
 # Modules Used
 # ============
 #
-# zpa_application_server_info - https://willguibr.github.io/zpacloud_ansible/modules/zpa_application_server_info.html
+# zpa_application_server_info - https://willguibr.github.io/zpacloud-ansible/modules/zpa_application_server_info.html
 #
 # Usage
 # =====
@@ -26,14 +26,14 @@
   tasks:
 
     - name: Gather Information Details of All Application Servers
-      willguibr.zpacloud_ansible.zpa_application_server_info:
+      willguibr.zpacloud.zpa_application_server_info:
       register: all_app_server
 
     - debug:
         msg: "{{ all_app_server }}"
 
     - name: Gather Information Details of an Application Server by Name
-      willguibr.zpacloud_ansible.zpa_application_server_info:
+      willguibr.zpacloud.zpa_application_server_info:
         name: server1.acme.com
       register: app_server_name
 
@@ -41,7 +41,7 @@
         msg: "{{ app_server_name }}"
 
     - name: Gather Information Details of an Application Server by ID
-      willguibr.zpacloud_ansible.zpa_application_server_info:
+      willguibr.zpacloud.zpa_application_server_info:
         id: "216196257331291921"
       register: app_server_id
 

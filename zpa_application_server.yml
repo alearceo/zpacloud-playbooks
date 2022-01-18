@@ -13,7 +13,7 @@
 # Modules Used
 # ============
 #
-# zpa_application_server - https://willguibr.github.io/zpacloud_ansible/modules/zpa_application_server.html
+# zpa_application_server - https://willguibr.github.io/zpacloud-ansible/modules/zpa_application_server.html
 #
 # Usage
 # =====
@@ -24,12 +24,25 @@
   hosts: localhost
 
   tasks:
+
     - name: Create First Application Server
       willguibr.zpacloud_ansible.zpa_application_server:
-        name: Example
+        name: Example1
         description: Example
         address: example.acme.com
         enabled: true
+      register: application_server1
+            
+    - debug:
+        msg: "{{ application_server1 }}"
+
+    - name: Gather Server Group ID
+      willguibr.zpacloud_ansible.zpa_server_group_info:
+        name: "All Other Services"
+      register: server_group_id
+
+    - debug:
+        msg: "{{ server_group_id }}"
 
     - name: Create Second Application Server
       willguibr.zpacloud_ansible.zpa_application_server:
@@ -37,5 +50,10 @@
         description: Example1
         address: example.acme.com
         enabled: true
-        app_server_group_ids: []
+        app_server_group_ids:
+          - id: "{{ server_group_id.data.0.id }}"
+      register: application_server2
+            
+    - debug:
+        msg: "{{ application_server2 }}"
 

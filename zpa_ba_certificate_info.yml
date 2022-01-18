@@ -13,7 +13,7 @@
 # Modules Used
 # ============
 #
-# zpa_ba_certificate_info - https://willguibr.github.io/zpacloud_ansible/modules/zpa_ba_certificate_info.html
+# zpa_ba_certificate_info - https://willguibr.github.io/zpacloud-ansible/modules/zpa_ba_certificate_info.html
 #
 # Usage
 # =====
@@ -25,14 +25,14 @@
 
   tasks:
     - name: Gather Details of All Browser Certificates
-      willguibr.zpacloud_ansible.zpa_ba_certificate_info:
+      willguibr.zpacloud.zpa_ba_certificate_info:
       register: certificates
 
     - debug:
       msg: "{{ certificates }}"
 
     - name: Gather Details of a Specific Browser Certificates by Name
-      willguibr.zpacloud_ansible.zpa_ba_certificate_info:
+      willguibr.zpacloud.zpa_ba_certificate_info:
         name: crm.acme.com
       register: certificate_name
 
@@ -40,7 +40,7 @@
       msg: "{{ certificate_name }}"
 
     - name: Gather Details of a Specific Browser Certificates by ID
-      willguibr.zpacloud_ansible.zpa_ba_certificate_info:
+      willguibr.zpacloud.zpa_ba_certificate_info:
         id: "216196257331282583"
       register: certificate_id
 
