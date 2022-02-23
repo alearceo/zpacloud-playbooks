@@ -24,7 +24,7 @@
   hosts: localhost
   tasks:
     - name: Gather information about all App segment
-      willguibr.zpacloud_ansible.zpa_browser_access_info:
+      willguibr.zpacloud.zpa_browser_access_info:
         name: "Browser Access Apps"
       register: app
     - name: app segment

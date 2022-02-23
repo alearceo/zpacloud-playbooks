@@ -2,5 +2,14 @@ version: 2
 updates:
   - package-ecosystem: "github-actions"
     directory: "/"
-    interval:
-      schedule: "weekly"
+    schedule:
+      interval: "monthly"
+    assignees:
+      - "willguibr"
+      
+  - package-ecosystem: "pip"
+    directory: "/"
+    schedule:
+      interval: "monthly"
+    assignees:
+      - "willguibr"

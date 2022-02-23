@@ -25,17 +25,17 @@
   tasks:
 
     - name: Create a Server Group
-      willguibr.zpacloud_ansible.zpa_server_group_info:
+      willguibr.zpacloud.zpa_server_group_info:
         name: "All Other Services"
       register: server_group_id
 
     - name: Create a Segment Group
-      willguibr.zpacloud_ansible.zpa_segment_group_info:
+      willguibr.zpacloud.zpa_segment_group_info:
         name: "All Other Services"
       register: segment_group_id
 
     - name: Gather Details of a Specific Browser Certificates by Name
-      willguibr.zpacloud_ansible.zpa_ba_certificate_info:
+      willguibr.zpacloud.zpa_ba_certificate_info:
         name: sales.securitygeek.io
       register: certificate_name
 
@@ -43,7 +43,7 @@
         msg: "{{ certificate_name }}"
 
     - name: Browser Access Application Segment
-      willguibr.zpacloud_ansible.zpa_browser_access:
+      willguibr.zpacloud.zpa_browser_access:
         name: Example
         description: Example
         enabled: true

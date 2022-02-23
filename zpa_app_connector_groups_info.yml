@@ -28,10 +28,10 @@
   
     - name: Gather Details of all App Connector Groups
       willguibr.zpacloud.zpa_app_connector_groups_info:
-      register: all_app_connector
+      register: all_app_connectors
 
     - debug:
-        msg: "{{ all_app_connector }}"
+        msg: "{{ all_app_connectors }}"
 
     - name: Gather Details of a Specific App Connector Groups by Name
       willguibr.zpacloud.zpa_app_connector_groups_info:

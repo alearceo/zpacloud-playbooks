@@ -45,7 +45,7 @@
         upgrade_day: "SUNDAY"
         upgrade_time_in_secs: "66600"
         override_version_profile: true
-        version_profile_id: "{{ version_profile_id.data.0.id }}"
+        version_profile_id: "{{ version_profile_id.data[0].id }}"
         dns_query_type: "IPV4"
 
     - name: Create Second App Connector Group Example2
@@ -61,7 +61,7 @@
         upgrade_day: "SUNDAY"
         upgrade_time_in_secs: "66600"
         override_version_profile: true
-        version_profile_id: "{{ version_profile_id.data.1.id }}"
+        version_profile_id: "{{ version_profile_id.data[1].id }}"
         dns_query_type: "IPV4"
 
     - name: Create Second App Connector Group Example3
@@ -77,6 +77,6 @@
         upgrade_day: "SUNDAY"
         upgrade_time_in_secs: "66600"
         override_version_profile: true
-        version_profile_id: "{{ version_profile_id.data.2.id }}"
+        version_profile_id: "{{ version_profile_id.data[2].id }}"
         dns_query_type: "IPV4"
 

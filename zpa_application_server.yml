@@ -26,7 +26,7 @@
   tasks:
 
     - name: Create First Application Server
-      willguibr.zpacloud_ansible.zpa_application_server:
+      willguibr.zpacloud.zpa_application_server:
         name: Example1
         description: Example
         address: example.acme.com
@@ -37,7 +37,7 @@
         msg: "{{ application_server1 }}"
 
     - name: Gather Server Group ID
-      willguibr.zpacloud_ansible.zpa_server_group_info:
+      willguibr.zpacloud.zpa_server_group_info:
         name: "All Other Services"
       register: server_group_id
 
@@ -45,7 +45,7 @@
         msg: "{{ server_group_id }}"
 
     - name: Create Second Application Server
-      willguibr.zpacloud_ansible.zpa_application_server:
+      willguibr.zpacloud.zpa_application_server:
         name: Example1
         description: Example1
         address: example.acme.com

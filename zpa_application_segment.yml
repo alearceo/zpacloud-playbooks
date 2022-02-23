@@ -26,23 +26,23 @@
   tasks:
 
     - name: Create a Server Group
-      willguibr.zpacloud_ansible.zpa_server_group_info:
+      willguibr.zpacloud.zpa_server_group_info:
         name: "All Other Services"
       register: server_group_id
 
     - debug:
-        msg: "{{ server_group_id.data.0.id }}"
+        msg: "{{ server_group_id.data[0].id }}"
 
     - name: Create a Segment Group
-      willguibr.zpacloud_ansible.zpa_segment_group_info:
+      willguibr.zpacloud.zpa_segment_group_info:
         name: "All Other Services"
       register: segment_group_id
 
     - debug:
-        msg: "{{ segment_group_id.data.0.id }}"
+        msg: "{{ segment_group_id.data[0].id }}"
 
     - name: Create an Application Segment
-      willguibr.zpacloud_ansible.zpa_application_segment:
+      willguibr.zpacloud.zpa_application_segment:
         state: absent
         name: Example Application
         description: Example Application Test
@@ -56,9 +56,9 @@
         domain_names:
           - crm1.example.com
           - crm2.example.com
-        segment_group_id: "{{ segment_group_id.data.0.id }}"
+        segment_group_id: "{{ segment_group_id.data[0].id }}"
         server_groups:
-          - id: "{{ server_group_id.data.0.id }}"
+          - id: "{{ server_group_id.data[0].id }}"
       register: application_segment
 
     - debug:
