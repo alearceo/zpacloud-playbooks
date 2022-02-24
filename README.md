@@ -1,8 +1,17 @@
-# zpacloud-ansible-playbooks
+[![CI](https://github.com/willguibr/zpacloud-playbooks/actions/workflows/ci.yml/badge.svg)](https://github.com/willguibr/zpacloud-playbooks/actions/workflows/ci.yml)
+# Zscaler Private Access - Ansible Playbooks
 
 Example Ansible playbooks using the Zscaler Private Access
 [Ansible Collection](https://github.com/willguibr/zpacloud-ansible), and what you'll need to get started writing your own. I'll try to add interesting things to this repository over time based on customer questions, so check back from time to time.
 
+- Free software: Apache 2.0 License
+- Documentation:
+    <https://willguibr.github.io/zpacloud-ansible/>
+- Repo:
+    <https://github.com/willguibr/zpacloud-ansible>
+- Example Playbooks:
+    <https://github.com/willguibr/zpacloud-playbooks>
+    
 ## Getting Started
 
 ### Installing Ansible
@@ -70,6 +79,8 @@ You're now ready to start using these playbooks.
 You can use these playbooks as a base by cloning this repository.  Each of them is documented with how to run them via
 `ansible-playbook` and their customization options.
 
+## Included content
+
 - [zpa_app_connector_groups](https://willguibr.github.io/zpacloud-ansible/modules/zpa_app_connector_groups.html) - Create/Update/Delete an app connector group.
 - [zpa_app_connector_groups_info](https://willguibr.github.io/zpacloud-ansible/modules/zpa_app_connector_groups_info.html) - Gather information details (ID and/or Name) of a app connector group.
 - [zpa_application_segment](https://willguibr.github.io/zpacloud-ansible/modules/zpa_application_segment.html) - Create/Update/Delete an application segment.
@@ -95,9 +106,9 @@ You can use these playbooks as a base by cloning this repository.  Each of them 
 - [zpa_scim_attribute_header_info](https://willguibr.github.io/zpacloud-ansible/modules/zpa_scim_attribute_header_info.html) - Gather information details (ID and/or Name) of a scim attribute header.
 - [zpa_scim_group_info](https://willguibr.github.io/zpacloud-ansible/modules/zpa_scim_group_info.html) - Gather information details (ID and/or Name) of a scim group.
 - [zpa_segment_group](https://willguibr.github.io/zpacloud-ansible/modules/zpa_segment_group.html) - Create/Update/Delete a segment group.
-- [zpa_segment_group_info - Gather information details (ID and/or Name) of a segment group.
+- [zpa_segment_group_info](https://willguibr.github.io/zpacloud-ansible/modules/zpa_segment_group_info.html) - Gather information details (ID and/or Name) of a segment group.
 - [zpa_server_group](https://willguibr.github.io/zpacloud-ansible/modules/zpa_server_group.html) - Create/Update/Delete a segment group.
 - [zpa_server_group_info](https://willguibr.github.io/zpacloud-ansible/modules/zpa_server_group_info.html) - Gather information details (ID and/or Name) of a server group.
-- [zpa_service_edge_group_info - Gather information details (ID and/or Name) of a service edge group.
+- [zpa_service_edge_group_info](https://willguibr.github.io/zpacloud-ansible/modules/zpa_service_edge_group_info.html) - Gather information details (ID and/or Name) of a service edge group.
 - [zpa_service_edge_group](https://willguibr.github.io/zpacloud-ansible/modules/zpa_service_edge_group.html) - Create/Update/Delete an service edge group.
 - [zpa_trusted_network_info](https://willguibr.github.io/zpacloud-ansible/modules/zpa_trusted_network_info.html) - Gather information details (ID and/or Name) of a trusted network for use in a policy access and/or forwarding rules.
