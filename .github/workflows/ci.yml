@@ -43,6 +43,10 @@ jobs:
         run: pipenv run ansible-lint *.yml
 
   release:
+    name: release
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: [test]
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v2
