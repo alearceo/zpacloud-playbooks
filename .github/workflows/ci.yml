@@ -3,7 +3,7 @@ name: CI
 on:
   push:
     branches:
-      - master
+      - main
   pull_request:
 
 jobs:
@@ -41,3 +41,28 @@ jobs:
 
       - name: Run ansible-lint
         run: pipenv run ansible-lint *.yml
+
+  release:
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup Node
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
+      - name: Create release and publish
+        uses: cycjimmy/semantic-release-action@v2
+        id: release
+        with:
+          semantic_version: 18.0.0
+          extra_plugins: |
+            @semantic-release/changelog
+            @semantic-release/git
+            conventional-changelog-eslint
+          branches: |
+            ['main']
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
