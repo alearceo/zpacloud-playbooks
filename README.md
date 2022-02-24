@@ -1,4 +1,5 @@
 [![CI](https://github.com/willguibr/zpacloud-playbooks/actions/workflows/ci.yml/badge.svg)](https://github.com/willguibr/zpacloud-playbooks/actions/workflows/ci.yml)
+[![GitHub Release](https://img.shields.io/github/v/release/willguibr/zpacloud-playbooks.svg)](https://github.com/willguibr/zpacloud-playbooks/releases)
 # Zscaler Private Access - Ansible Playbooks
 
 Example Ansible playbooks using the Zscaler Private Access
