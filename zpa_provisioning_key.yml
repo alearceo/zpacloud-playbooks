@@ -4,11 +4,12 @@
 # Description
 # ===========
 #
-# Quick examples of how to use the 'zpa_provisioning_key' module to create an Provisioning Key in the ZPA Cloud.
+# Quick examples of how to use the 'zpa_provisioning_key' module to create an Provisioning Key
+# in the ZPA Cloud.
 #
-# This playbook requires proper API credentials to be passed statically or via environment variables for connection to the ZPA Cloud 'zpa_client_id', 'zpa_client_secret' and zpa_customer_id
-# These may be defined as host variables (see `host_vars/zpa_cloud.yml` for an example) or 
-# extra vars.
+# This playbook requires proper API credentials to be passed statically or via environment variables connection
+# to the ZPA Cloud 'zpa_client_id', 'zpa_client_secret' and zpa_customer_id. These may be defined as host variables
+# (see `host_vars/zpa_cloud.yml` for an example) or extra vars.
 #
 # Modules Used
 # ============
@@ -20,25 +21,18 @@
 #
 #  $ ansible-playbook zpa_provisioning_key.yml
 
-- name: Create
-  hosts: localhost
+- hosts: localhost
+  connection: local
+
   tasks:
 
     - name: Gather Information Details of All Enrollment Certificates
       willguibr.zpacloud.zpa_enrollement_certificate_info:
         name: "Connector"
-      register: connector_cert_id
-
-    - debug:
-        msg: "{{ connector_cert_id.data[0].id}}"
 
     - name: Gather Information Details of Customer Version Profile Group by Name
       willguibr.zpacloud.zpa_customer_version_profile_info:
         name: "New Release"
-      register: version_profile_id
-
-    - debug:
-        msg: "{{ version_profile_id.data[0].id }}"
 
     - name: Create First App Connector Group Example1
       willguibr.zpacloud.zpa_app_connector_groups:
@@ -54,9 +48,8 @@
         upgrade_day: "SUNDAY"
         upgrade_time_in_secs: "66600"
         override_version_profile: true
-        version_profile_id: "{{ version_profile_id.data[0].id}}"
+        version_profile_id: "{{ version_profile_id.data[0].id }}"
         dns_query_type: "IPV4"
-      register: app_connector_group
 
     - name: Create/Update/Delete App Connector Group Provisioning Key
       willguibr.zpacloud.zpa_provisioning_key:
@@ -66,15 +59,3 @@
         max_usage: "10"
         enrollment_cert_id: "{{ connector_cert_id.data[0].id }}"
         zcomponent_id: "{{ app_connector_group.data.id }}"
-      register: provisioning_key
-
-    - debug:
-        msg: "{{ provisioning_key }}"
-
-    # - name: Create/Update/Delete Service Edge Connector Group Provisioning Key
-    #   willguibr.zpacloud.zpa_provisioning_key:
-    #     name: "Service Edge Connector Group Provisioning Key"
-    #     association_type: "CONNECTOR_GRP"
-    #     max_usage: "10"
-    #     enrollment_cert_id: 6573
-    #     zcomponent_id: 216196257331291903

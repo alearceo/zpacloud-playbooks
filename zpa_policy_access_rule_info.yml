@@ -1,0 +1,55 @@
+---
+# zpa_policy_access_rule_info.yml - Get details (ID and/or Name) of a Policy Access Rule resource.
+#
+# Description
+# ===========
+#
+# Quick example of how to use the 'zpa_policy_access_rule_info' module to retrieve a Policy Access Rule details from the ZPA Cloud.
+#
+# This playbook requires proper API credentials to be passed statically or via environment variables connection
+# to the ZPA Cloud 'zpa_client_id', 'zpa_client_secret' and zpa_customer_id. These may be defined as host variables
+# (see `host_vars/zpa_cloud.yml` for an example) or extra vars.
+#
+# Modules Used
+# ============
+#
+# zpa_policy_access_rule_info - https://willguibr.github.io/zpacloud-ansible/modules/zpa_policy_access_rule_info.html
+#
+# Usage
+# =====
+#
+#  $ ansible-playbook zpa_policy_access_rule_info.yml
+
+- hosts: localhost
+  connection: local
+
+  tasks:
+
+# Gather All Policy Access Rule Info
+    - name: Policy Access Rule - CRM_Example
+      willguibr.zpacloud.zpa_policy_access_rule_info:
+      register: access_rules
+
+    - name: access_rules
+      debug:
+        msg: "{{ access_rules }}"
+
+# Gather Specific Policy Access Rule Info By Name
+    - name: Policy Access Rule - CRM_Example By Name
+      willguibr.zpacloud.zpa_policy_access_rule_info:
+        name: "CRM_Example"
+      register: access_rule_name
+
+    - name: access_rule_name
+      debug:
+        msg: "{{ access_rule_name }}"
+
+# Gather Specific Policy Access Rule Info By ID
+    - name: Policy Access Rule - CRM_Example By ID
+      willguibr.zpacloud.zpa_policy_access_rule_info:
+        id: "216196257331282583"
+      register: access_rule_id
+
+    - name: access_rule_id
+      debug:
+        msg: "{{ access_rule_id }}"

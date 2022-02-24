@@ -6,9 +6,9 @@
 #
 # Quick example of how to use the 'zpa_lss_config_controller' module to create an LSS Config Controller in the ZPA Cloud.
 #
-# This playbook requires proper API credentials to be passed statically or via environment variables for connection to the ZPA Cloud 'zpa_client_id', 'zpa_client_secret' and zpa_customer_id
-# These may be defined as host variables (see `host_vars/zpa_cloud.yml` for an example) or 
-# extra vars.
+# This playbook requires proper API credentials to be passed statically or via environment variables connection
+# to the ZPA Cloud 'zpa_client_id', 'zpa_client_secret' and zpa_customer_id. These may be defined as host variables
+# (see `host_vars/zpa_cloud.yml` for an example) or extra vars.
 #
 # LSS Config Requires One of the following Log Type Format.
 # The paramenter `log_type` take one of the following parameters:
@@ -28,13 +28,14 @@
 #
 #  $ ansible-playbook zpa_lss_config_controller.yml
 
-- name: LSS Config Controller
-  hosts: localhost
+- hosts: localhost
+  connection: local
+
   tasks:
 
 # Retrieve App Connector Group ID
     - name: LSS App Connector Group
-      zpa_app_connector_groups_info:
+      willguibr.zpacloud.zpa_app_connector_groups_info:
         name: "LSS App Connector Group"
       register: lss_app_connector
 
@@ -66,7 +67,7 @@
 
 # Create LSS Configuration
     - name: LSS User Activity
-      zpa_lss_config_controller:
+      willguibr.zpacloud.zpa_lss_config_controller:
         config:
           name: "LSS User Activity"
           description: "LSS User Activity"

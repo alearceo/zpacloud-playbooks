@@ -1,0 +1,61 @@
+---
+# zpa_scim_attribute_header_info.yml - Get details (ID and/or Name) of a SCIM Attribute Header resource.
+#
+# Description
+# ===========
+#
+# Quick example of how to use the 'zpa_scim_attribute_header_info' module to retrieve a SCIM Attribute Header
+# details from the ZPA Cloud.
+#
+# This playbook requires proper API credentials to be passed statically or via environment variables connection
+# to the ZPA Cloud 'zpa_client_id', 'zpa_client_secret' and zpa_customer_id. These may be defined as host variables
+# (see `host_vars/zpa_cloud.yml` for an example) or extra vars.
+#
+# Important: The IDP Name attribute is mandatory
+#
+# Modules Used
+# ============
+#
+# zpa_scim_attribute_header_info - https://willguibr.github.io/zpacloud-ansible/modules/zpa_scim_attribute_header_info.html
+#
+# Usage
+# =====
+#
+#  $ ansible-playbook zpa_scim_attribute_header_info.yml
+
+- hosts: localhost
+  connection: local
+
+  tasks:
+
+# Gather all SCIM Attribute Header Info
+    - name: Gather Details of All SCIM Attribute Headers
+      willguibr.zpacloud.zpa_scim_attribute_header_info:
+        idp_name: User_Okta
+      register: scim_attributes
+
+    - name: scim_attributes
+      debug:
+        msg: "{{ scim_attributes }}"
+
+# Gather Specific SCIM Attribute Header Info By Name
+    - name: Gather Details of a Specific SCIM Attribute Header by Name
+      willguibr.zpacloud.zpa_scim_attribute_header_info:
+        idp_name: User_Okta
+        name: costCenter
+      register: scim_attribute_name
+
+    - name: scim_attribute_name
+      debug:
+        msg: "{{ scim_attribute_name }}"
+
+# Gather Specific SCIM Attribute Header Info By ID
+    - name: Gather Details of a Specific SCIM Attribute Header by ID
+      willguibr.zpacloud.zpa_scim_attribute_header_info:
+        idp_name: User_Okta
+        id: "216196257331285842"
+      register: scim_attribute_id
+
+    - name: scim_attribute_id
+      debug:
+        msg: "{{ scim_attribute_id }}"

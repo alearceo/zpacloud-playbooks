@@ -6,9 +6,9 @@
 #
 # Quick examples of how to use the 'zpa_application_segment' module to create an Application Segment in the ZPA Cloud.
 #
-# This playbook requires proper API credentials to be passed statically or via environment variables for connection to the ZPA Cloud 'zpa_client_id', 'zpa_client_secret' and zpa_customer_id
-# These may be defined as host variables (see `host_vars/zpa_cloud.yml` for an example) or 
-# extra vars.
+# This playbook requires proper API credentials to be passed statically or via environment variables connection
+# to the ZPA Cloud 'zpa_client_id', 'zpa_client_secret' and zpa_customer_id. These may be defined as host variables
+# (see `host_vars/zpa_cloud.yml` for an example) or extra vars.
 #
 # Modules Used
 # ============
@@ -20,27 +20,24 @@
 #
 #  $ ansible-playbook zpa_application_segment.yml
 
-- name: Create ZPA Application Segment
-  hosts: localhost
+- hosts: localhost
+  connection: local
 
   tasks:
 
-    - name: Create a Server Group
+# Gather Server Group Info
+    - name: Gather Server Group Info
       willguibr.zpacloud.zpa_server_group_info:
         name: "All Other Services"
       register: server_group_id
 
-    - debug:
-        msg: "{{ server_group_id.data[0].id }}"
-
-    - name: Create a Segment Group
+# Gather Segment Group Info
+    - name: Gather Segment Group Info
       willguibr.zpacloud.zpa_segment_group_info:
         name: "All Other Services"
       register: segment_group_id
 
-    - debug:
-        msg: "{{ segment_group_id.data[0].id }}"
-
+# Create an Application Segment
     - name: Create an Application Segment
       willguibr.zpacloud.zpa_application_segment:
         state: absent
@@ -59,7 +56,3 @@
         segment_group_id: "{{ segment_group_id.data[0].id }}"
         server_groups:
           - id: "{{ server_group_id.data[0].id }}"
-      register: application_segment
-
-    - debug:
-        msg: "{{ application_segment }}"

@@ -1,0 +1,55 @@
+---
+# zpa_policy_forwarding_rule_info.yml - Create/Update/Delete a Policy Forwarding Rule.
+#
+# Description
+# ===========
+#
+# Quick example of how to use the 'zpa_policy_forwarding_rule_info' module to create a Policy Forwarding Rule in the ZPA Cloud.
+#
+# This playbook requires proper API credentials to be passed statically or via environment variables connection
+# to the ZPA Cloud 'zpa_client_id', 'zpa_client_secret' and zpa_customer_id. These may be defined as host variables
+# (see `host_vars/zpa_cloud.yml` for an example) or extra vars.
+#
+# Modules Used
+# ============
+#
+# zpa_policy_forwarding_rule_info - https://willguibr.github.io/zpacloud-ansible/modules/zpa_policy_forwarding_rule_info.html
+#
+# Usage
+# =====
+#
+#  $ ansible-playbook zpa_policy_forwarding_rule_info.yml
+
+- hosts: localhost
+  connection: local
+
+  tasks:
+
+# Gather All Forwarding Policy Info
+    - name: Forwarding Policy - CRM_Example
+      willguibr.zpacloud.zpa_policy_forwarding_rule_info:
+      register: forwarding_rules
+
+    - name: forwarding_rules
+      debug:
+        msg: "{{ forwarding_rules }}"
+
+# Gather Specific Forwarding Policy Info By Name
+    - name: Forwarding Policy - CRM_Example By Name
+      willguibr.zpacloud.zpa_policy_forwarding_rule_info:
+        name: "CRM_Example"
+      register: forwarding_rule_name
+
+    - name: forwarding_rule_name
+      debug:
+        msg: "{{ forwarding_rule_name }}"
+
+# Gather Specific Forwarding Policy Info By ID
+    - name: Forwarding Policy - CRM_Example By ID
+      willguibr.zpacloud.zpa_policy_forwarding_rule_info:
+        id: "216196257331282583"
+      register: forwarding_rule_id
+
+    - name: forwarding_rule_id
+      debug:
+        msg: "{{ forwarding_rule_id }}"

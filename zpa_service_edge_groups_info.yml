@@ -1,0 +1,52 @@
+---
+# zpa_service_edge_groups.yml - Get details (ID and/or Name) of a Service Edge Groups.
+#
+# Description
+# ===========
+#
+# Quick example of how to use the 'zpa_segment_group' module to create a Service Edge Groups
+# in the ZPA Cloud.
+#
+# This playbook requires proper API credentials to be passed statically or via environment variables connection
+# to the ZPA Cloud 'zpa_client_id', 'zpa_client_secret' and zpa_customer_id. These may be defined as host variables
+# (see `host_vars/zpa_cloud.yml` for an example) or extra vars.
+#
+# Modules Used
+# ============
+#
+# zpa_service_edge_groups - https://willguibr.github.io/zpacloud-ansible/modules/zpa_service_edge_groups.html
+#
+# Usage
+# =====
+#
+#  $ ansible-playbook zpa_service_edge_groups.yml
+
+- hosts: localhost
+  connection: local
+
+  tasks:
+    - name: Gather Detail Information of All Service Edge Groups
+      willguibr.zpacloud.zpa_service_edge_groups:
+      register: service_edge_groups
+
+    - name: service_edge_groups
+      debug:
+        msg: "{{ service_edge_groups }}"
+
+    - name: Gather Details of All Service Edge Groups by Name
+      willguibr.zpacloud.zpa_service_edge_groups:
+        name: Example
+      register: service_edge_group_name
+
+    - name: service_edge_group_name
+      debug:
+        msg: "{{ service_edge_group_name }}"
+
+    - name: Gather Details of All Service Edge Groups by ID
+      willguibr.zpacloud.zpa_service_edge_groups:
+        id: "216196257331291969"
+      register: service_edge_group_id
+
+    - name: service_edge_group_id
+      debug:
+        msg: "{{ service_edge_group_id }}"

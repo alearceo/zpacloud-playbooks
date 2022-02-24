@@ -6,9 +6,9 @@
 #
 # Quick example of how to use the 'zpa_application_server' module to create a Application Serverin the ZPA Cloud.
 #
-# This playbook requires proper API credentials to be passed statically or via environment variables for connection to the ZPA Cloud 'zpa_client_id', 'zpa_client_secret' and zpa_customer_id
-# These may be defined as host variables (see `host_vars/zpa_cloud.yml` for an example) or 
-# extra vars.
+# This playbook requires proper API credentials to be passed statically or via environment variables connection
+# to the ZPA Cloud 'zpa_client_id', 'zpa_client_secret' and zpa_customer_id. These may be defined as host variables
+# (see `host_vars/zpa_cloud.yml` for an example) or extra vars.
 #
 # Modules Used
 # ============
@@ -20,30 +20,31 @@
 #
 #  $ ansible-playbook zpa_application_server.yml
 
-- name: Create ZPA Application Servers
-  hosts: localhost
+- hosts: localhost
+  connection: local
 
   tasks:
 
+# Create a Simple Application Server
     - name: Create First Application Server
       willguibr.zpacloud.zpa_application_server:
         name: Example1
         description: Example
         address: example.acme.com
         enabled: true
-      register: application_server1
-            
-    - debug:
-        msg: "{{ application_server1 }}"
+      register: application_servers
 
+    - name: application_servers
+      debug:
+        msg: "{{ application_servers }}"
+
+# Gather Server Group Info ID
     - name: Gather Server Group ID
       willguibr.zpacloud.zpa_server_group_info:
         name: "All Other Services"
       register: server_group_id
 
-    - debug:
-        msg: "{{ server_group_id }}"
-
+# Create an Application Server with Server Group
     - name: Create Second Application Server
       willguibr.zpacloud.zpa_application_server:
         name: Example1
@@ -53,7 +54,3 @@
         app_server_group_ids:
           - id: "{{ server_group_id.data.0.id }}"
       register: application_server2
-            
-    - debug:
-        msg: "{{ application_server2 }}"
-

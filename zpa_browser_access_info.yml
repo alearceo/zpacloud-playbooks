@@ -6,9 +6,9 @@
 #
 # Quick examples of how to use the 'zpa_browser_access_info' module to create an Application Segment in the ZPA Cloud.
 #
-# This playbook requires proper API credentials to be passed statically or via environment variables for connection to the ZPA Cloud 'zpa_client_id', 'zpa_client_secret' and zpa_customer_id
-# These may be defined as host variables (see `host_vars/zpa_cloud.yml` for an example) or 
-# extra vars.
+# This playbook requires proper API credentials to be passed statically or via environment variables connection
+# to the ZPA Cloud 'zpa_client_id', 'zpa_client_secret' and zpa_customer_id. These may be defined as host variables
+# (see `host_vars/zpa_cloud.yml` for an example) or extra vars.
 #
 # Modules Used
 # ============
@@ -20,13 +20,36 @@
 #
 #  $ ansible-playbook zpa_browser_access_info.yml
 
-- name: App segment
-  hosts: localhost
+- hosts: localhost
+  connection: local
+
   tasks:
-    - name: Gather information about all App segment
+
+# Gather All Browser Access Application Segments
+    - name: Browser Access App Segment
       willguibr.zpacloud.zpa_browser_access_info:
-        name: "Browser Access Apps"
-      register: app
-    - name: app segment
+      register: browser_access
+
+    - name: browser_access
       debug:
-        msg: "{{ app }}"
+        msg: "{{ browser_access }}"
+
+# Gather Specific Browser Access Application Segment By Name
+    - name: BCRM_Example By Name
+      willguibr.zpacloud.zpa_browser_access_info:
+        name: "CRM_Example"
+      register: app_segment_name
+
+    - name: app_segment_name
+      debug:
+        msg: "{{ app_segment_name }}"
+
+# Gather Specific Browser Access Application Segment By ID
+    - name: CRM_Example By ID
+      willguibr.zpacloud.zpa_browser_access_info:
+        name: "CRM_Example"
+      register: app_segment_id
+
+    - name: app_segment_id
+      debug:
+        msg: "{{ app_segment_id }}"

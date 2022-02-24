@@ -6,9 +6,9 @@
 #
 # Quick example of how to use the 'zpa_server_group' module to create a Server Group in the ZPA Cloud.
 #
-# This playbook requires proper API credentials to be passed statically or via environment variables for connection to the ZPA Cloud 'zpa_client_id', 'zpa_client_secret' and zpa_customer_id
-# These may be defined as host variables (see `host_vars/zpa_cloud.yml` for an example) or 
-# extra vars.
+# This playbook requires proper API credentials to be passed statically or via environment variables connection
+# to the ZPA Cloud 'zpa_client_id', 'zpa_client_secret' and zpa_customer_id. These may be defined as host variables
+# (see `host_vars/zpa_cloud.yml` for an example) or extra vars.
 #
 # Modules Used
 # ============
@@ -37,7 +37,3 @@
           - id: "216196257331291921"
         applications:
           - id: "216196257331291981"
-      register: server_group
-
-    - debug:
-        msg: "{{ server_group }}"

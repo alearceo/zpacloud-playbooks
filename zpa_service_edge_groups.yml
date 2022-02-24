@@ -1,10 +1,10 @@
 ---
-# zpa_app_connector_groups.yml - Create/Update/Delete an App Connector Group.
+# zpa_service_edge_groups.yml - Create/Update/Delete a Service Edge Group.
 #
 # Description
 # ===========
 #
-# Quick examples of how to use the 'zpa_app_connector_groups' module to create an App Connector Group in the ZPA Cloud.
+# Quick example of how to use the 'zpa_service_edge_groups' module to create Service Edge Group in ZPA.
 #
 # This playbook requires proper API credentials to be passed statically or via environment variables connection
 # to the ZPA Cloud 'zpa_client_id', 'zpa_client_secret' and zpa_customer_id. These may be defined as host variables
@@ -13,18 +13,18 @@
 # Modules Used
 # ============
 #
-# zpa_app_connector_groups - https://willguibr.github.io/zpacloud-ansible/modules/zpa_app_connector_groups.html
+# zpa_service_edge_groups - https://willguibr.github.io/zpacloud-ansible/modules/zpa_service_edge_groups.html
 #
 # Usage
 # =====
 #
-#  $ ansible-playbook zpa_app_connector_groups.yml
+#  $ ansible-playbook zpa_service_edge_groups.yml
 
 - hosts: localhost
   connection: local
 
   vars:
-    app_connector_group:
+    service_edge_groups:
       - name: Example
         description: Example
         enabled: true
@@ -39,9 +39,8 @@
         version_profile_id: 2
 
   tasks:
-
-    - name: Create/Update/Delete App Connector Group
-      willguibr.zpacloud.zpa_app_connector_groups:
+    - name: Create/Update/Delete Service Edge Group
+      willguibr.zpacloud.zpa_service_edge_groups:
         name: "{{ item.name }}"
         description: "{{ item.description }}"
         enabled: "{{ item.enabled }}"
@@ -50,10 +49,9 @@
         latitude: "{{ item.latitude }}"
         longitude: "{{ item.longitude }}"
         location: "{{ item.location }}"
-        upgrade_day: "{{ item.upgrade_day }}"
+        upgrade_day: "{{ item.upgrade_day }}}"
         upgrade_time_in_secs: "{{ item.upgrade_time_in_secs }}"
         override_version_profile: "{{ item.override_version_profile }}"
         version_profile_id: "{{ item.version_profile_id }}"
-        dns_query_type: "{{ item.dns_query_type }}"
-      with_items: "{{ app_connector_group }}"
-      tags: app_connector_group
+      with_items: "{{ service_edge_groups }}"
+      tags: service_edge_groups

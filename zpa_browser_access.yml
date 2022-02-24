@@ -6,9 +6,9 @@
 #
 # Quick examples of how to use the 'zpa_browser_access' module to create a Browser Access Application Segment in the ZPA Cloud.
 #
-# This playbook requires proper API credentials to be passed statically or via environment variables for connection to the ZPA Cloud 'zpa_client_id', 'zpa_client_secret' and zpa_customer_id
-# These may be defined as host variables (see `host_vars/zpa_cloud.yml` for an example) or 
-# extra vars.
+# This playbook requires proper API credentials to be passed statically or via environment variables connection
+# to the ZPA Cloud 'zpa_client_id', 'zpa_client_secret' and zpa_customer_id. These may be defined as host variables
+# (see `host_vars/zpa_cloud.yml` for an example) or extra vars.
 #
 # Modules Used
 # ============
@@ -20,8 +20,9 @@
 #
 #  $ ansible-playbook zpa_browser_access.yml
 
-- name: Browser Access Application Segment
-  hosts: localhost
+- hosts: localhost
+  connection: local
+
   tasks:
 
     - name: Create a Server Group
@@ -38,9 +39,6 @@
       willguibr.zpacloud.zpa_ba_certificate_info:
         name: sales.securitygeek.io
       register: certificate_name
-
-    - debug:
-        msg: "{{ certificate_name }}"
 
     - name: Browser Access Application Segment
       willguibr.zpacloud.zpa_browser_access:
@@ -60,14 +58,10 @@
         server_groups:
           - id: "{{ server_group_id.data.id }}"
         clientless_apps:
-            name: "sales.securitygeek.io"
-            application_protocol: "HTTP"
-            application_port: "80"
-            certificate_id: "{{ certificate_name.data.id }}"
-            trust_untrusted_cert: true
-            enabled: true
-            domain: "sales.securitygeek.io"
-      register: browser_access_app
-
-    - debug:
-        msg: "{{ browser_access_app }}"
+          name: "sales.securitygeek.io"
+          application_protocol: "HTTP"
+          application_port: "80"
+          certificate_id: "{{ certificate_name.data.id }}"
+          trust_untrusted_cert: true
+          enabled: true
+          domain: "sales.securitygeek.io"

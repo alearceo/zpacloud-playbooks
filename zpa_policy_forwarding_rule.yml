@@ -1,0 +1,68 @@
+---
+# zpa_policy_forwarding_rule.yml - Create/Update/Delete a Policy Forwarding Rule.
+#
+# Description
+# ===========
+#
+# Quick example of how to use the 'zpa_policy_forwarding_rule' module to create a Policy Forwarding Rule in the ZPA Cloud.
+#
+# This playbook requires proper API credentials to be passed statically or via environment variables connection
+# to the ZPA Cloud 'zpa_client_id', 'zpa_client_secret' and zpa_customer_id. These may be defined as host variables
+# (see `host_vars/zpa_cloud.yml` for an example) or extra vars.
+#
+# Modules Used
+# ============
+#
+# zpa_policy_forwarding_rule - https://willguibr.github.io/zpacloud-ansible/modules/zpa_policy_forwarding_rule.html
+#
+# Usage
+# =====
+#
+#  $ ansible-playbook zpa_policy_forwarding_rule.yml
+
+- hosts: localhost
+  connection: local
+
+  tasks:
+
+# Gather Applicaton Segment Info
+    - name: Application Segment - CRM_Example
+      willguibr.zpacloud.zpa_application_segment_info:
+        name: "CRM_Example"
+      register: application_segment
+
+# Get IdP Controller ID Information
+    - name: Get information IdP Controller ID
+      willguibr.zpacloud.zpa_idp_controller_info:
+        name: "User_Okta"
+      register: user_okta
+
+    - name: Get Contractors SCIM Group ID
+      willguibr.zpacloud.zpa_scim_group_info:
+        name: "Contractors"
+        idp_name: "User_Okta"
+      register: contractors_group
+
+# Create Policy Forwarding Rules
+    - name: Forwarding Policy - CRM_Example
+      willguibr.zpacloud.zpa_policy_forwarding_rule:
+        name: "CRM_Example"
+        description: "CRM_Example"
+        action: "BYPASS"
+        rule_order: 1
+        operator: "AND"
+        conditions:
+          - negated: false
+            operator: "OR"
+            operands:
+              - name: "application_segment"
+                object_type: "APP"
+                lhs: "id"
+                rhs: "{{ application_segment.data[0].id }}"
+          - negated: false
+            operator: "OR"
+            operands:
+              - name: "contractors_group"
+                object_type: "SCIM_GROUP"
+                lhs: "{{ sgio_user_okta.data[0].id }}"
+                rhs: "{{ contractors_group.data[0].id }}"

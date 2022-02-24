@@ -6,9 +6,9 @@
 #
 # Quick example of how to use the 'zpa_segment_group' module to create a Segment Group in the ZPA Cloud.
 #
-# This playbook requires proper API credentials to be passed statically or via environment variables for connection to the ZPA Cloud 'zpa_client_id', 'zpa_client_secret' and zpa_customer_id
-# These may be defined as host variables (see `host_vars/zpa_cloud.yml` for an example) or 
-# extra vars.
+# This playbook requires proper API credentials to be passed statically or via environment variables connection
+# to the ZPA Cloud 'zpa_client_id', 'zpa_client_secret' and zpa_customer_id. These may be defined as host variables
+# (see `host_vars/zpa_cloud.yml` for an example) or extra vars.
 #
 # Modules Used
 # ============
@@ -20,19 +20,22 @@
 #
 #  $ ansible-playbook zpa_segment_group.yml
 
-- name: Create/Update/Delete a Server Group
-  hosts: localhost
+- hosts: localhost
+  connection: local
+
+  vars:
+    segment_group:
+      - name: Example
+        description: Example
+        config_space: "DEFAULT"
+        enabled: true
+        tcp_keep_alive_enabled: "1"
 
   tasks:
     - name: Create/Update/Delete a Server Group
       willguibr.zpacloud.zpa_segment_group:
-        config_space: "DEFAULT"
-        name: Example Segment Group
-        description: Example Segment Group
-        enabled: true
-        policy_migrated: true
-        tcp_keep_alive_enabled: "1"
-      register: segment_group
-
-    - debug:
-        msg: "{{ segment_group }}"
+        name: "{{ item.name }}"
+        description: "{{ item.description }}"
+        enabled: "{{ item.enabled }}"
+        config_space: "{{ item.config_space }}"
+        tcp_keep_alive_enabled: "{{ item.tcp_keep_alive_enabled }}"

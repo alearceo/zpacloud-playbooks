@@ -1,0 +1,61 @@
+---
+# zpa_scim_group_info.yml - Get details (ID and/or Name) of a SCIM Group resource.
+#
+# Description
+# ===========
+#
+# Quick example of how to use the 'zpa_scim_group_info' module to retrieve a SCIM Group details
+# from the ZPA Cloud.
+#
+# This playbook requires proper API credentials to be passed statically or via environment variables connection
+# to the ZPA Cloud 'zpa_client_id', 'zpa_client_secret' and zpa_customer_id. These may be defined as host variables
+# (see `host_vars/zpa_cloud.yml` for an example) or extra vars.
+#
+# Important: The IDP Name attribute is mandatory
+#
+# Modules Used
+# ============
+#
+# zpa_scim_group_info - https://willguibr.github.io/zpacloud-ansible/modules/zpa_scim_group_info.html
+#
+# Usage
+# =====
+#
+#  $ ansible-playbook zpa_scim_group_info.yml
+
+- hosts: localhost
+  connection: local
+
+  tasks:
+
+# Gather all SCIM Group Info
+    - name: Gather Details of All SCIM Groups
+      willguibr.zpacloud.zpa_scim_group_info:
+        idp_name: User_Okta
+      register: scim_groups
+
+    - name: scim_groups
+      debug:
+        msg: "{{ scim_groups }}"
+
+# Gather Specific SCIM Group Info By Name
+    - name: Gather Details of a Specific SCIM Group by Name
+      willguibr.zpacloud.zpa_scim_group_info:
+        idp_name: User_Okta
+        name: Engineering
+      register: scim_group_name
+
+    - name: scim_group_name
+      debug:
+        msg: "{{ scim_group_name }}"
+
+# Gather Specific SCIM Group Info By ID
+    - name: Gather Details of a Specific SCIM Group by ID
+      willguibr.zpacloud.zpa_scim_group_info:
+        idp_name: User_Okta
+        id: "293480"
+      register: scim_group_id
+
+    - name: scim_group_id
+      debug:
+        msg: "{{ scim_group_id }}"

@@ -6,9 +6,9 @@
 #
 # Quick example of how to use the 'zpa_ba_certificate_info' module to retrieve a Browser Certificate details from the ZPA Cloud.
 #
-# This playbook requires proper API credentials to be passed statically or via environment variables for connection to the ZPA Cloud 'zpa_client_id', 'zpa_client_secret' and zpa_customer_id
-# These may be defined as host variables (see `host_vars/zpa_cloud.yml` for an example) or 
-# extra vars.
+# This playbook requires proper API credentials to be passed statically or via environment variables connection
+# to the ZPA Cloud 'zpa_client_id', 'zpa_client_secret' and zpa_customer_id. These may be defined as host variables
+# (see `host_vars/zpa_cloud.yml` for an example) or extra vars.
 #
 # Modules Used
 # ============
@@ -20,29 +20,36 @@
 #
 #  $ ansible-playbook zpa_ba_certificate_info.yml
 
-- name: Gather Details of All Browser Certificates
-  hosts: localhost
+- hosts: localhost
+  connection: local
 
   tasks:
+
+# Gather All Browser Certificates
     - name: Gather Details of All Browser Certificates
       willguibr.zpacloud.zpa_ba_certificate_info:
       register: certificates
 
-    - debug:
-      msg: "{{ certificates }}"
+    - name: certificates
+      debug:
+        msg: "{{ certificates }}"
 
+# Gather Browser Certificates by Name
     - name: Gather Details of a Specific Browser Certificates by Name
       willguibr.zpacloud.zpa_ba_certificate_info:
         name: crm.acme.com
       register: certificate_name
 
-    - debug:
-      msg: "{{ certificate_name }}"
+    - name: certificate_name
+      debug:
+        msg: "{{ certificate_name }}"
 
+# Gather Browser Certificates by ID
     - name: Gather Details of a Specific Browser Certificates by ID
       willguibr.zpacloud.zpa_ba_certificate_info:
         id: "216196257331282583"
       register: certificate_id
 
-    - debug:
-      msg: "{{ certificate_id }}"
+    - name: certificate_id
+      debug:
+        msg: "{{ certificate_id }}"

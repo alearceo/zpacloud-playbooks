@@ -1,0 +1,55 @@
+---
+# zpa_policy_timeout_rule_info.yml - Create/Update/Delete a Policy Timeout Rule.
+#
+# Description
+# ===========
+#
+# Quick example of how to use the 'zpa_policy_timeout_rule_info' module to create a Policy Timeout Rule in the ZPA Cloud.
+#
+# This playbook requires proper API credentials to be passed statically or via environment variables connection
+# to the ZPA Cloud 'zpa_client_id', 'zpa_client_secret' and zpa_customer_id. These may be defined as host variables
+# (see `host_vars/zpa_cloud.yml` for an example) or extra vars.
+#
+# Modules Used
+# ============
+#
+# zpa_policy_timeout_rule_info - https://willguibr.github.io/zpacloud-ansible/modules/zpa_policy_timeout_rule_info.html
+#
+# Usage
+# =====
+#
+#  $ ansible-playbook zpa_policy_timeout_rule_info.yml
+
+- hosts: localhost
+  connection: local
+
+  tasks:
+
+# Gather All Timeout Policy Info
+    - name: Timeout Policy - CRM_Example
+      willguibr.zpacloud.zpa_policy_timeout_rule_info:
+      register: timeout_rule
+
+    - name: timeout_rule
+      debug:
+        msg: "{{ timeout_rule }}"
+
+# Gather Specific Timeout Policy Info By Name
+    - name: Timeout Policy - CRM_Example By Name
+      willguibr.zpacloud.zpa_policy_timeout_rule_info:
+        name: "CRM_Example"
+      register: timeout_rule_name
+
+    - name: timeout_rule_name
+      debug:
+        msg: "{{ timeout_rule_name }}"
+
+# Gather Specific Timeout Policy Info By ID
+    - name: Timeout Policy - CRM_Example By ID
+      willguibr.zpacloud.zpa_policy_timeout_rule_info:
+        id: "216196257331282583"
+      register: timeout_rule_id
+
+    - name: timeout_rule_id
+      debug:
+        msg: "{{ timeout_rule_id }}"

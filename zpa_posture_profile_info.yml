@@ -1,0 +1,55 @@
+---
+# zpa_posture_profile_info.yml - Get details (ID and/or Name) of a Posture Profile resource.
+#
+# Description
+# ===========
+#
+# Quick example of how to use the 'zpa_posture_profile_info' module to retrieve a Posture Profile details from the ZPA Cloud.
+#
+# This playbook requires proper API credentials to be passed statically or via environment variables connection
+# to the ZPA Cloud 'zpa_client_id', 'zpa_client_secret' and zpa_customer_id. These may be defined as host variables
+# (see `host_vars/zpa_cloud.yml` for an example) or extra vars.
+#
+# Modules Used
+# ============
+#
+# zpa_posture_profile_info - https://willguibr.github.io/zpacloud-ansible/modules/zpa_posture_profile_info.html
+#
+# Usage
+# =====
+#
+#  $ ansible-playbook zpa_posture_profile_info.yml
+
+- hosts: localhost
+  connection: local
+
+  tasks:
+
+# Gather all posture profile Info
+    - name: Gather Details of All Posture Profiles
+      willguibr.zpacloud.zpa_posture_profile_info:
+      register: posture_profiles
+
+    - name: posture_profiles
+      debug:
+        msg: "{{ posture_profiles }}"
+
+# Gather Specific Posture Profile Info By Name
+    - name: Gather Details of a Specific Posture Profile by Name
+      willguibr.zpacloud.zpa_posture_profile_info:
+        name: CrowdStrike_ZPA_ZTA_40 (zscalerthree.net)
+      register: posture_profile_name
+
+    - name: posture_profile_name
+      debug:
+        msg: "{{ posture_profile_name }}"
+
+# Gather Specific Posture Profile Info By ID
+    - name: Gather Details of a Specific Posture Profile by ID
+      willguibr.zpacloud.zpa_posture_profile_info:
+        id: "216196257331282583"
+      register: posture_profile_id
+
+    - name: posture_profile_id
+      debug:
+        msg: "{{ posture_profile_id }}"

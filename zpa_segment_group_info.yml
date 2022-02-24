@@ -6,9 +6,9 @@
 #
 # Quick example of how to use the 'zpa_segment_group' module to create a Segment Group in the ZPA Cloud.
 #
-# This playbook requires proper API credentials to be passed statically or via environment variables for connection to the ZPA Cloud 'zpa_client_id', 'zpa_client_secret' and zpa_customer_id
-# These may be defined as host variables (see `host_vars/zpa_cloud.yml` for an example) or 
-# extra vars.
+# This playbook requires proper API credentials to be passed statically or via environment variables connection
+# to the ZPA Cloud 'zpa_client_id', 'zpa_client_secret' and zpa_customer_id. These may be defined as host variables
+# (see `host_vars/zpa_cloud.yml` for an example) or extra vars.
 #
 # Modules Used
 # ============
@@ -20,23 +20,25 @@
 #
 #  $ ansible-playbook zpa_segment_group_info.yml
 
-- name: Gather Detail Information of All Server Groups
-  hosts: localhost
+- hosts: localhost
+  connection: local
 
   tasks:
     - name: Gather Detail Information of All Segment Groups
       willguibr.zpacloud.zpa_segment_group_info:
-      register: all_segment_group
+      register: segment_groups
 
-    - debug:
-        msg: "{{ all_segment_group }}"
+    - name: segment_groups
+      debug:
+        msg: "{{ segment_groups }}"
 
     - name: Gather Details of All Segment Groups by Name
       willguibr.zpacloud.zpa_segment_group_info:
-        name: Example1
+        name: Example
       register: segment_group_name
 
-    - debug:
+    - name: segment_group_name
+      debug:
         msg: "{{ segment_group_name }}"
 
     - name: Gather Details of All Segment Groups by ID
@@ -44,5 +46,6 @@
         id: "216196257331291969"
       register: segment_group_id
 
-    - debug:
+    - name: segment_group_id
+      debug:
         msg: "{{ segment_group_id }}"

@@ -1,0 +1,57 @@
+---
+# zpa_trusted_network_info.yml - Get details (ID and/or Name) of a Trusted Network resource.
+#
+# Description
+# ===========
+#
+# Quick example of how to use the 'zpa_trusted_network_info' module to retrieve a Trusted Network
+# details from the ZPA Cloud.
+#
+# This playbook requires proper API credentials to be passed statically or via environment variables
+# for connection to the ZPA Cloud 'zpa_client_id', 'zpa_client_secret' and zpa_customer_id
+# These may be defined as host variables (see `host_vars/zpa_cloud.yml` for an example) or
+# extra vars.
+#
+# Modules Used
+# ============
+#
+# zpa_trusted_network_info - https://willguibr.github.io/zpacloud-ansible/modules/zpa_trusted_network_info.html
+#
+# Usage
+# =====
+#
+#  $ ansible-playbook zpa_trusted_network_info.yml
+
+- hosts: localhost
+  connection: local
+
+  tasks:
+
+# Gather all Trusted Network Info
+    - name: Gather Details of All Trusted Networks
+      willguibr.zpacloud.zpa_trusted_networks_info:
+      register: trusted_networks
+
+    - name: trusted_networks
+      debug:
+        msg: "{{ trusted_networks }}"
+
+# Gather Specific Trusted Network Info By Name
+    - name: Gather Details of a Specific Trusted Network by Name
+      willguibr.zpacloud.zpa_trusted_networks_info:
+        name: Corp-Trusted-Networks (zscalerthree.net)
+      register: trusted_network_name
+
+    - name: trusted_network_name
+      debug:
+        msg: "{{ trusted_network_name }}"
+
+# Gather Specific Trusted Network Info By ID
+    - name: Gather Details of a Specific Trusted Network by ID
+      willguibr.zpacloud.zpa_trusted_networks_info:
+        id: "216196257331282583"
+      register: trusted_network_id
+
+    - name: trusted_network_id
+      debug:
+        msg: "{{ trusted_network_id }}"

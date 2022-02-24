@@ -1,0 +1,56 @@
+---
+# zpa_saml_attribute_info.yml - Get details (ID and/or Name) of a Saml Attribute resource.
+#
+# Description
+# ===========
+#
+# Quick example of how to use the 'zpa_saml_attribute_info' module to retrieve a Saml Attribute details
+# from the ZPA Cloud.
+#
+# This playbook requires proper API credentials to be passed statically or via environment variables connection
+# to the ZPA Cloud 'zpa_client_id', 'zpa_client_secret' and zpa_customer_id. These may be defined as host variables
+# (see `host_vars/zpa_cloud.yml` for an example) or extra vars.
+#
+# Modules Used
+# ============
+#
+# zpa_saml_attribute_info - https://willguibr.github.io/zpacloud-ansible/modules/zpa_saml_attribute_info.html
+#
+# Usage
+# =====
+#
+#  $ ansible-playbook zpa_saml_attribute_info.yml
+
+- hosts: localhost
+  connection: local
+
+  tasks:
+
+# Gather all Saml Attribute Info
+    - name: Gather Details of All Saml Attributes
+      willguibr.zpacloud.zpa_saml_attribute_info:
+      register: saml_attributes
+
+    - name: saml_attributes
+      debug:
+        msg: "{{ saml_attributes }}"
+
+# Gather Specific Saml Attribute Info By Name
+    - name: Gather Details of a Specific Saml Attribute by Name
+      willguibr.zpacloud.zpa_saml_attribute_info:
+        name: DepartmentName_User_Okta
+      register: saml_attribute_name
+
+    - name: saml_attribute_name
+      debug:
+        msg: "{{ saml_attribute_name }}"
+
+# Gather Specific Saml Attribute Info By ID
+    - name: Gather Details of a Specific Saml Attribute by ID
+      willguibr.zpacloud.zpa_saml_attribute_info:
+        id: "216196257331282583"
+      register: saml_attribute_id
+
+    - name: saml_attribute_id
+      debug:
+        msg: "{{ saml_attribute_id }}"
